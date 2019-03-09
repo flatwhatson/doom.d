@@ -42,6 +42,10 @@
 (after! lsp-ui
   (setq lsp-eldoc-enable-signature-help nil))
 
+;; HACK fix doom-dashboard projectile keys
+(add-hook! 'after-init-hook
+  (require 'projectile))
+
 (after! ivy
   (setq ivy-magic-tilde nil
         ivy-extra-directories nil
@@ -111,12 +115,14 @@
     (adaptive-wrap-prefix-mode +1)
     (visual-line-mode +1)))
 
+(def-package! elisp-demos
+  :commands elisp-demos-advice-helpful-update
+  :init
+  (advice-add 'helpful-update :after #'elisp-demos-advice-helpful-update))
+
 (def-package! google-c-style
   :after cc-mode
   :config
   (c-add-style "Google" google-c-style))
 
 (load! "+bindings")
-
-;; HACK fix doom-dashboard projectile keys
-(require 'projectile)
