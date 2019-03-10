@@ -6,6 +6,10 @@
  "C-x o" #'ace-window
  "C-x O" #'ace-swap-window
 
+ "C-h ." #'+lookup/documentation
+ "M-."   #'+lookup/definition
+ "M-?"   #'+lookup/references
+
  (:leader
    (:prefix "q"
      :desc "Restart Emacs"           "r" #'doom/restart
@@ -32,8 +36,8 @@
  (:after projectile
    (:map projectile-command-map
      "f"   #'projectile-find-file
-     "F"   #'projectile-find-file-in-known-projects
      "4 f" #'projectile-find-file-other-window
+     "F"   #'projectile-find-file-in-known-projects
      "4 F" #'+projectile-find-file-in-known-projects-other-window
      "s"   #'+ivy/project-search
      "S"   #'+ivy/project-search-from-cwd)))

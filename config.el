@@ -23,8 +23,9 @@
  doom-font (font-spec :family "Hack" :size (+hidpi-font-size 12))
  doom-big-font (font-spec :family "Hack" :size (+hidpi-font-size 18))
 
- split-height-threshold nil
  mouse-yank-at-point t
+ set-mark-command-repeat-pop t
+ split-height-threshold nil
  x-stretch-cursor t
  tab-width 2
 
@@ -42,10 +43,6 @@
 (after! lsp-ui
   (setq lsp-eldoc-enable-signature-help nil))
 
-;; HACK fix doom-dashboard projectile keys
-(add-hook! 'after-init-hook
-  (require 'projectile))
-
 (after! ivy
   (setq ivy-magic-tilde nil
         ivy-extra-directories nil
@@ -62,7 +59,7 @@
   (setq lsp-enable-indentation nil
         lsp-ui-sideline-enable nil))
 
-(def-package-hook! projectile :post-init
+(after! projectile
   (setq projectile-indexing-method 'hybrid))
 
 (after! hl-todo
@@ -70,7 +67,7 @@
 
 (after! nav-flash
   (add-hook! 'doom-enter-buffer-hook
-    (+nav-flash|blink-cursor-maybe)))
+    (+nav-flash/blink-cursor)))
 
 (after! org
   (add-hook! :append 'org-mode-hook
@@ -124,5 +121,10 @@
   :after cc-mode
   :config
   (c-add-style "Google" google-c-style))
+
+(def-package! goto-line-preview
+  :commands goto-line-preview
+  :init
+  (global-set-key [remap goto-line] 'goto-line-preview))
 
 (load! "+bindings")

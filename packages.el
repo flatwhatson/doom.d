@@ -4,3 +4,4 @@
 (package! adaptive-wrap)
 (package! elisp-demos)
 (package! google-c-style)
+(package! goto-line-preview)
