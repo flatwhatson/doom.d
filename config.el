@@ -1,8 +1,10 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-;; TODO submit adaptive-wrap feature
+;; TODO polish & submit adaptive-wrap feature
+;;  - new modules/editor/adaptive-wrap
+;;  - hook to existing indent detection
+;;  - customize indent multiplier per mode
 
-;; TODO fix RET continuing one-line comments
 ;; TODO fix one-star lineup in multiline c comments
 ;; TODO fix two-star expansion in multiline c comments
 
@@ -29,7 +31,6 @@
  x-stretch-cursor t
  tab-width 2
 
- +ivy-buffer-preview t
  +workspaces-on-switch-project-behavior nil)
 
 (save-place-mode +1)
@@ -38,7 +39,7 @@
 (set-popup-rule! "^\\*Customize" :ignore t)
 
 ;; HACK lsp-eldoc broken due to missing seq functions
-;; https://github.com/emacs-lsp/lsp-mode/commits/master
+;; https://github.com/emacs-lsp/lsp-mode/commit/24d421dc7e0b0e4d96b468e870e8161656a3142e#r32570721
 ;; https://github.com/emacs-mirror/emacs/blob/master/lisp/emacs-lisp/seq.el
 (after! lsp-ui
   (setq lsp-eldoc-enable-signature-help nil))
@@ -47,7 +48,8 @@
   (setq ivy-magic-tilde nil
         ivy-extra-directories nil
         ivy-use-virtual-buffers t
-        ivy-virtual-abbreviate 'abbreviate))
+        ivy-virtual-abbreviate 'abbreviate
+        +ivy-buffer-preview t))
 
 (after! company
   (setq company-minimum-prefix-length 2))
@@ -111,11 +113,6 @@
     (setq adaptive-wrap-extra-indent (* c-basic-offset 2))
     (adaptive-wrap-prefix-mode +1)
     (visual-line-mode +1)))
-
-(def-package! elisp-demos
-  :commands elisp-demos-advice-helpful-update
-  :init
-  (advice-add 'helpful-update :after #'elisp-demos-advice-helpful-update))
 
 (def-package! google-c-style
   :after cc-mode
