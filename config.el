@@ -21,8 +21,8 @@
 ;; TODO forward/backward-word whitespace handling
 
 (setq-default
- doom-theme 'doom-tomorrow-night
- doom-font (font-spec :family "Hack" :size (+hidpi-font-size 12))
+ doom-theme    'doom-tomorrow-night
+ doom-font     (font-spec :family "Hack" :size (+hidpi-font-size 12))
  doom-big-font (font-spec :family "Hack" :size (+hidpi-font-size 18))
 
  mouse-yank-at-point t
@@ -38,18 +38,15 @@
 
 (set-popup-rule! "^\\*Customize" :ignore t)
 
-;; HACK lsp-eldoc broken due to missing seq functions
-;; https://github.com/emacs-lsp/lsp-mode/commit/24d421dc7e0b0e4d96b468e870e8161656a3142e#r32570721
-;; https://github.com/emacs-mirror/emacs/blob/master/lisp/emacs-lisp/seq.el
-(after! lsp-ui
-  (setq lsp-eldoc-enable-signature-help nil))
-
 (after! ivy
   (setq ivy-magic-tilde nil
         ivy-extra-directories nil
         ivy-use-virtual-buffers t
         ivy-virtual-abbreviate 'abbreviate
         +ivy-buffer-preview t))
+
+(after! swiper
+  (setq swiper-goto-start-of-match t))
 
 (after! company
   (setq company-minimum-prefix-length 2))
@@ -69,11 +66,26 @@
 
 (after! nav-flash
   (add-hook! 'doom-enter-buffer-hook
-    (+nav-flash/blink-cursor)))
+    (+nav-flash|delayed-blink-cursor)))
 
 (after! org
   (add-hook! :append 'org-mode-hook
     (org-bullets-mode -1)))
+
+(after! text-mode
+  (add-to-list 'auto-mode-alist '("\\.log\\'" . text-mode))
+
+  (add-hook! 'text-mode-hook
+    (visual-line-mode +1)
+
+    ;; display ansi color codes
+    ;; FIXME do this without modifying buffer
+    (let ((inhibit-read-only t))
+      (ansi-color-apply-on-region (point-min) (point-max)))
+
+    ;; hide dos eol markers
+    (setq buffer-display-table (make-display-table))
+    (aset buffer-display-table ?\^M [])))
 
 (after! cc-mode
   (add-to-list 'auto-mode-alist '("\\.ipp\\'" . c++-mode))

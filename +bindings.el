@@ -2,6 +2,7 @@
 
 (map!
 
+ "C-x f" nil
  "C-x l" #'ace-link
  "C-x o" #'ace-window
  "C-x O" #'ace-swap-window
@@ -17,16 +18,16 @@
 
  (:after isearch
    (:map isearch-mode-map
-     [return] #'+isearch-exit-beginning-of-match
-     "RET"    #'+isearch-exit-beginning-of-match
+     [return] #'+isearch-exit-start-of-match
+     "RET"    #'+isearch-exit-start-of-match
      "C-RET"  #'isearch-exit))
 
  (:after ivy
    (:map ivy-minibuffer-map
      [return] #'ivy-alt-done
      "RET"    #'ivy-alt-done
-     [tab]    #'ivy-partial
-     "TAB"    #'ivy-partial))
+     [tab]    #'+ivy-partial-or-complete
+     "TAB"    #'+ivy-partial-or-complete))
 
  (:after flycheck
    (:map flycheck-mode-map
