@@ -3,7 +3,6 @@
 (map!
 
  "C-x f" nil
- "C-x l" #'ace-link
  "C-x o" #'ace-window
  "C-x O" #'ace-swap-window
 
@@ -33,6 +32,11 @@
    (:map flycheck-mode-map
      "M-n" #'flycheck-next-error
      "M-p" #'flycheck-previous-error))
+
+ (:after pdf-view
+   (:map pdf-view-mode-map
+     "q" nil
+     "Q" nil))
 
  (:after projectile
    (:map projectile-command-map

@@ -14,11 +14,11 @@
 
 ;; TODO cc: fix inclass -> template-args-cont
 
-;; TODO doom/kill-project-buffers
-
+;; TODO function to kill project buffers
 ;; TODO improve projectile-find-other-file ordering
 ;; TODO support naming buffers relative to project
 ;; TODO forward/backward-word whitespace handling
+;; TODO save-place support for pdf-view-mode
 
 (setq-default
  doom-theme    'doom-tomorrow-night
@@ -61,6 +61,9 @@
 (after! projectile
   (setq projectile-indexing-method 'hybrid))
 
+(after! ace-window
+  (setq aw-swap-invert t))
+
 (after! hl-todo
   (add-to-list 'hl-todo-keyword-faces `("HACK" . ,(face-foreground 'warning))))
 
@@ -98,7 +101,9 @@
     (sp-local-pair 'c++-mode "{" nil :post-handlers '(:rem ("| "      "SPC"))))
 
   (map! :map c++-mode-map
-        ":" #'+cc-better-electric-colon)
+        ":" #'+cc-better-electric-colon
+        "(" nil ")" nil
+        "{" nil "}" nil)
 
   (c-add-style
    "flat" '("Google"
