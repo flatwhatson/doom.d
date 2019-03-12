@@ -139,6 +139,6 @@
 (def-package! goto-line-preview
   :commands goto-line-preview
   :init
-  (global-set-key [remap goto-line] 'goto-line-preview))
+  (global-set-key [remap goto-line] #'goto-line-preview))
 
 (load! "+bindings")
