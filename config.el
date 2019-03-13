@@ -15,10 +15,12 @@
 ;; TODO cc: fix inclass -> template-args-cont
 
 ;; TODO function to kill project buffers
-;; TODO improve projectile-find-other-file ordering
 ;; TODO support naming buffers relative to project
 ;; TODO forward/backward-word whitespace handling
 ;; TODO save-place support for pdf-view-mode
+
+;; TODO improve projectile-find-other-file ordering (closest)
+;; TODO improve counsel-recentf ordering (recent first)
 
 (setq-default
  doom-theme    'doom-tomorrow-night
