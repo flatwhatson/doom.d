@@ -5,11 +5,9 @@
 ;;  - hook to existing indent detection
 ;;  - customize indent multiplier per mode
 
-;; TODO fix one-star lineup in multiline c comments
-;; TODO fix two-star expansion in multiline c comments
-
 ;; TODO sp: insert semicolon after enum/class/struct
 ;; TODO sp: insert namespace close comment
+;; TODO sp: multiline comment expansion (used to work?)
 ;; TODO sp: smarter arglist-close
 
 ;; TODO cc: fix inclass -> template-args-cont
@@ -21,15 +19,18 @@
 
 ;; TODO improve projectile-find-other-file ordering (closest)
 ;; TODO improve counsel-recentf ordering (recent first)
+;; TODO stabilise +ivy/project-search order after ivy-resume
+;; TODO profile & improve lsp-mode performance while typing
 
 (setq-default
  doom-theme    'doom-tomorrow-night
- doom-font     (font-spec :family "Hack" :size (+hidpi-font-size 12))
- doom-big-font (font-spec :family "Hack" :size (+hidpi-font-size 18))
+ doom-font     (font-spec :family "Hack" :size 12) ;(+hidpi-font-size 12))
+ doom-big-font (font-spec :family "Hack" :size 18) ;(+hidpi-font-size 18))
 
  mouse-yank-at-point t
  set-mark-command-repeat-pop t
  split-height-threshold nil
+ split-width-threshold nil
  x-stretch-cursor t
  tab-width 2
 
@@ -144,3 +145,4 @@
   (global-set-key [remap goto-line] #'goto-line-preview))
 
 (load! "+bindings")
+(load! "+faces")

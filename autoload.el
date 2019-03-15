@@ -2,6 +2,15 @@
 
 ;;;###autoload
 (defun +hidpi-font-size (size)
+  "Auto-scale the font size based on DPI.
+
+On standard 24\" 1080p display: 12 -> 12
+On high DPI 14\" 1440p display: 12 -> 18"
+  ;; NOTE
+  ;; 24 inch 1920x1080 primary:   pixel-height 1080 mm-height 292
+  ;; 14 inch 2560x1440 primary:   pixel-height 1440 mm-height 254
+  ;; 29 inch 2560x1080 secondary: pixel-height 1080 mm-height 254 (from primary)
+  ;; TODO try `display-monitor-attributes-list'
   (if (or (not (display-pixel-height))
           (not (display-mm-height)))
       size
@@ -64,6 +73,7 @@
   "Complete the minibuffer text as much as possible.
 If the text hasn't changed as a result, complete the minibuffer text with the
 current selection."
+  ;; FIXME restore candidate after ivy-partial
   (interactive)
   (cond ((ivy-partial))
         ((or (eq this-command last-command)

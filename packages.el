@@ -11,11 +11,6 @@
 (package! multiple-cursors
   :recipe (:fetcher github :repo "flatwhatson/multiple-cursors.el"))
 
-;; HACK ivy-rich from github, pending issue
-;; https://github.com/melpa/melpa/issues/6069
-(package! ivy-rich
-  :recipe (:fetcher github :repo "Yevgnen/ivy-rich"))
-
 (package! adaptive-wrap)
 (package! google-c-style)
 (package! goto-line-preview)
