@@ -72,17 +72,13 @@ On high DPI 14\" 1440p display: 12 -> 18"
 (defun +ivy-partial-or-complete ()
   "Complete the minibuffer text as much as possible.
 If the text hasn't changed as a result, complete the minibuffer text with the
-current selection."
+currently selected candidate."
   ;; FIXME restore candidate after ivy-partial
   (interactive)
   (cond ((ivy-partial))
         ((or (eq this-command last-command)
              (eq ivy--length 1))
-         (let ((selection
-                (string-remove-suffix
-                 "/" (ivy-state-current ivy-last))))
-           (delete-region (minibuffer-prompt-end) (point-max))
-           (insert (setq ivy-text selection))))))
+         (ivy-insert-current))))
 
 ;;;###autoload
 (defun +projectile-find-file-in-known-projects-other-window ()

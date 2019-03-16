@@ -32,6 +32,8 @@
  split-height-threshold nil
  split-width-threshold nil
  x-stretch-cursor t
+
+ indent-tabs-mode nil
  tab-width 2
 
  +workspaces-on-switch-project-behavior nil)
@@ -77,6 +79,9 @@
 (after! org
   (add-hook! :append 'org-mode-hook
     (org-bullets-mode -1)))
+
+(after! python
+  (setq python-indent-offset 2))
 
 (after! text-mode
   (add-to-list 'auto-mode-alist '("\\.log\\'" . text-mode))
