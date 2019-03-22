@@ -172,5 +172,8 @@
     (setq mode-name "PKGBUILD"
           mode-line-process nil)))
 
+(def-package! expand-region-subword
+  :after expand-region)
+
 (load! "+bindings")
 (load! "+faces")

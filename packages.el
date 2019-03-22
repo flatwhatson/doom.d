@@ -9,6 +9,8 @@
 ;; HACK expand-region fork, upstream closed for PRs
 (package! expand-region
   :recipe (:fetcher github :repo "flatwhatson/expand-region.el"))
+(package! expand-region-subword
+  :recipe (:fetcher github :repo "flatwhatson/expand-region-subword"))
 
 ;; HACK multiple-cursors fork, upstream closed for PRs
 (package! multiple-cursors
