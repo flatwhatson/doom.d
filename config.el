@@ -11,16 +11,27 @@
 ;; TODO sp: smarter arglist-close
 
 ;; TODO cc: fix inclass -> template-args-cont
+;; TODO cc: fix company firing on c-electric-slash
+;; TODO cc: fix c-electric-brace reformatting namespace close
 
-;; TODO function to kill project buffers
+;; TODO flycheck: limit size of posframe for giant errors
+
+;; TODO ccls: look for */compile_commands.json
+;; - set compilationDatabaseDirectory in ccls-initialization-options
+;; - needs to be a per-project setting...
+
+;; TODO pkgbuild-mode: customize faces
+
 ;; TODO support naming buffers relative to project
 ;; TODO forward/backward-word whitespace handling
 ;; TODO save-place support for pdf-view-mode
 
 ;; TODO improve projectile-find-other-file ordering (closest)
 ;; TODO improve counsel-recentf ordering (recent first)
+;; TODO improve switch-workspace-buffer ordering (virtuals last)
 ;; TODO stabilise +ivy/project-search order after ivy-resume
 ;; TODO profile & improve lsp-mode performance while typing
+;; TODO investigate smooth scrolling options
 
 (setq-default
  doom-theme    'doom-tomorrow-night
@@ -37,6 +48,11 @@
  tab-width 2
 
  +workspaces-on-switch-project-behavior nil)
+
+;; NOTE last resort for debug messages from ccls
+;;(setq ccls-args '("-v=1" "-log-file=/tmp/ccls.log"))
+(setq ccls-initialization-options
+      '(:index (:threads 2)))
 
 (save-place-mode +1)
 (global-subword-mode +1)
@@ -145,9 +161,16 @@
   (c-add-style "Google" google-c-style))
 
 (def-package! goto-line-preview
-  :commands goto-line-preview
+  :defer t
   :init
   (global-set-key [remap goto-line] #'goto-line-preview))
+
+(def-package! pkgbuild-mode
+  :defer t
+  :config
+  (add-hook! 'pkgbuild-mode-hook
+    (setq mode-name "PKGBUILD"
+          mode-line-process nil)))
 
 (load! "+bindings")
 (load! "+faces")
