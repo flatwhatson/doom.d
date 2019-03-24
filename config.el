@@ -47,12 +47,11 @@
  indent-tabs-mode nil
  tab-width 2
 
- +workspaces-on-switch-project-behavior nil)
+ +workspaces-on-switch-project-behavior nil
 
-;; NOTE last resort for debug messages from ccls
-;;(setq ccls-args '("-v=1" "-log-file=/tmp/ccls.log"))
-(setq ccls-initialization-options
-      '(:index (:threads 2)))
+ ;; NOTE last resort for debug messages from ccls
+ ;;ccls-args '("-v=1" "-log-file=/tmp/ccls.log")
+ ccls-initialization-options '(:index (:threads 2)))
 
 (save-place-mode +1)
 (global-subword-mode +1)
@@ -155,6 +154,14 @@
     (adaptive-wrap-prefix-mode +1)
     (visual-line-mode +1)))
 
+(def-package! expand-region-subword
+  :after expand-region)
+
+(def-package! flycheck-package
+  :after flycheck
+  :config
+  (flycheck-package-setup))
+
 (def-package! google-c-style
   :after cc-mode
   :config
@@ -171,9 +178,6 @@
   (add-hook! 'pkgbuild-mode-hook
     (setq mode-name "PKGBUILD"
           mode-line-process nil)))
-
-(def-package! expand-region-subword
-  :after expand-region)
 
 (load! "+bindings")
 (load! "+faces")

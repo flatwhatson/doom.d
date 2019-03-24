@@ -17,6 +17,7 @@
   :recipe (:fetcher github :repo "flatwhatson/multiple-cursors.el"))
 
 (package! adaptive-wrap)
+(package! flycheck-package)
 (package! google-c-style)
 (package! goto-line-preview)
 (package! pkgbuild-mode)
