@@ -71,6 +71,9 @@
 (after! company
   (setq company-minimum-prefix-length 2))
 
+(after! expand-region
+  (setq expand-region-subword-enabled t))
+
 (after! flycheck
   (setq flycheck-display-errors-delay 0.1))
 
@@ -153,9 +156,6 @@
     (setq adaptive-wrap-extra-indent (* c-basic-offset 2))
     (adaptive-wrap-prefix-mode +1)
     (visual-line-mode +1)))
-
-(def-package! expand-region-subword
-  :after expand-region)
 
 (def-package! flycheck-package
   :after flycheck

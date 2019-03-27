@@ -10,6 +10,8 @@
  "M-."   #'+lookup/definition
  "M-?"   #'+lookup/references
 
+ "M-SPC" #'set-mark-command
+
  (:leader
    (:prefix "q"
      :desc "Restart Emacs"           "r" #'doom/restart
