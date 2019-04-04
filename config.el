@@ -13,6 +13,8 @@
 ;; TODO cc: fix inclass -> template-args-cont
 ;; TODO cc: fix company firing on c-electric-slash
 ;; TODO cc: fix c-electric-brace reformatting namespace close
+;; TODO cc: fix duplicate close-angle-brace on #include complete
+;; TODO cc: expand-region support for template arguments
 
 ;; TODO flycheck: limit size of posframe for giant errors
 
@@ -21,6 +23,8 @@
 ;; - needs to be a per-project setting...
 
 ;; TODO pkgbuild-mode: customize faces
+
+;; TODO perl: configure cperl-mode for doom
 
 ;; TODO support naming buffers relative to project
 ;; TODO forward/backward-word whitespace handling
@@ -126,10 +130,10 @@
     (sp-local-pair 'c++-mode "(" nil :post-handlers '(:rem ("||\n[i]" "RET")))
     (sp-local-pair 'c++-mode "{" nil :post-handlers '(:rem ("| "      "SPC"))))
 
-  (map! :map c++-mode-map
-        ":" #'+cc-better-electric-colon
-        "(" nil ")" nil
-        "{" nil "}" nil)
+  ;; HACK install bindings late as possible
+  (add-transient-hook! 'c-mode-common-hook
+    (map! :map c-mode-base-map
+        ":" #'+cc-better-electric-colon))
 
   (c-add-style
    "flat" '("Google"
@@ -142,6 +146,7 @@
              (arglist-cont          +cc-collapse-brace-list 0)
              (arglist-cont-nonempty +cc-collapse-brace-list ++)
              (arglist-close         +cc-better-arglist-close 0)
+             (statement-cont        . ++)
              (template-args-cont    . ++))))
 
   (setq-default
