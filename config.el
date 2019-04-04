@@ -128,7 +128,8 @@
 
   (after! smartparens
     (sp-local-pair 'c++-mode "(" nil :post-handlers '(:rem ("||\n[i]" "RET")))
-    (sp-local-pair 'c++-mode "{" nil :post-handlers '(:rem ("| "      "SPC"))))
+    (sp-local-pair 'c++-mode "{" nil :post-handlers '(:rem ("| "      "SPC")))
+    (sp-local-pair 'c++-mode "<" nil :actions nil))
 
   ;; HACK install bindings late as possible
   (add-transient-hook! 'c-mode-common-hook
