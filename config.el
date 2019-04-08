@@ -51,10 +51,12 @@
  indent-tabs-mode nil
  tab-width 2
 
+ +ivy-buffer-icons t
+ +ivy-buffer-preview t
  +workspaces-on-switch-project-behavior nil
 
  ;; NOTE last resort for debug messages from ccls
- ;;ccls-args '("-v=1" "-log-file=/tmp/ccls.log")
+ ;;ccls-args '("-v=2" "-log-file=/tmp/ccls.log")
  ccls-initialization-options '(:index (:threads 2)))
 
 (save-place-mode +1)
@@ -66,8 +68,7 @@
   (setq ivy-magic-tilde nil
         ivy-extra-directories nil
         ivy-use-virtual-buffers t
-        ivy-virtual-abbreviate 'abbreviate
-        +ivy-buffer-preview t))
+        ivy-virtual-abbreviate 'abbreviate))
 
 (after! swiper
   (setq swiper-goto-start-of-match t))
