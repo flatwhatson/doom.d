@@ -1,10 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; ~/.doom.d/packages.el
 
-;; HACK keycast fork, WIP doom compatibility
-(package! keycast
-  :recipe (:fetcher github :repo "flatwhatson/keycast"))
-
 (package! adaptive-wrap)
 (package! google-c-style)
 (package! goto-line-preview)
@@ -12,3 +8,13 @@
 
 (package! flycheck-package)
 (package! gif-screencast)
+
+;; TODO objed doom compatibility
+(package! objed)
+
+;; TODO keycast doom compatibility
+(package! keycast)
+
+;; HACK WIP swiper-isearch improvements
+(package! swiper
+  :recipe (:fetcher github :repo "flatwhatson/swiper"))

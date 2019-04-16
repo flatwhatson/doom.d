@@ -6,11 +6,11 @@
  "C-x o" #'ace-window
  "C-x O" #'ace-swap-window
 
+ "C-S-s"   #'swiper-isearch
+
  "C-h ." #'+lookup/documentation
  "M-."   #'+lookup/definition
  "M-?"   #'+lookup/references
-
- "M-SPC" #'set-mark-command
 
  (:leader
    (:prefix "q"

@@ -6,11 +6,25 @@
 
 On standard 24\" 1080p display: 12 -> 12
 On high DPI 14\" 1440p display: 12 -> 18"
-  ;; NOTE
+
+  ;; NOTE values from `display-pixel-height' and `display-mm-height'
   ;; 24 inch 1920x1080 primary:   pixel-height 1080 mm-height 292
   ;; 14 inch 2560x1440 primary:   pixel-height 1440 mm-height 254
   ;; 29 inch 2560x1080 secondary: pixel-height 1080 mm-height 254 (from primary)
-  ;; TODO try `display-monitor-attributes-list'
+
+  ;; NOTE dual-monitor `display-monitor-attributes-list'
+  ;; (((name . "eDP1")
+  ;;   (geometry 0 0 1920 1080)
+  ;;   (mm-size 310 170)
+  ;;   (frames))
+  ;;  ((name . "HDMI1")
+  ;;   (geometry 1920 0 2560 1080)
+  ;;   (mm-size 670 280)
+  ;;   (frames #<frame *ielm* – Doom Emacs 0x1221c30> #<frame  0x74f2450>)))
+
+  ;; TODO find monitor for current frame, use that geometry/mm-size for calcs
+  ;; TODO make scaling factor configurable and more intuitive
+
   (if (or (not (display-pixel-height))
           (not (display-mm-height)))
       size

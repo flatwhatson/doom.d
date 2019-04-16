@@ -19,8 +19,8 @@
 ;; TODO flycheck: limit size of posframe for giant errors
 
 ;; TODO ccls: look for */compile_commands.json
-;; - set compilationDatabaseDirectory in ccls-initialization-options
-;; - needs to be a per-project setting...
+;;  - set compilationDatabaseDirectory in ccls-initialization-options
+;;  - needs to be a per-project setting...
 
 ;; TODO pkgbuild-mode: customize faces
 
@@ -34,13 +34,15 @@
 ;; TODO improve counsel-recentf ordering (recent first)
 ;; TODO improve switch-workspace-buffer ordering (virtuals last)
 ;; TODO stabilise +ivy/project-search order after ivy-resume
-;; TODO profile & improve lsp-mode performance while typing
 ;; TODO investigate smooth scrolling options
+
+;; TODO profile & improve lsp+cc performance
+;;  - https://github.com/victorhge/iedit/issues/83
 
 (setq-default
  doom-theme    'doom-tomorrow-night
- doom-font     (font-spec :family "Hack" :size 12) ;(+hidpi-font-size 12))
- doom-big-font (font-spec :family "Hack" :size 18) ;(+hidpi-font-size 18))
+ doom-font     (font-spec :family "Hack" :size (+hidpi-font-size 12))
+ doom-big-font (font-spec :family "Hack" :size (+hidpi-font-size 18))
 
  mouse-yank-at-point t
  set-mark-command-repeat-pop t
