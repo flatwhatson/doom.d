@@ -2,15 +2,18 @@
 
 (map!
 
- "C-x f" nil
+ "C-x f" #'counsel-find-file
  "C-x o" #'ace-window
  "C-x O" #'ace-swap-window
 
- "C-S-s"   #'swiper-isearch
+ "C-S-s" #'swiper-isearch
 
  "C-h ." #'+lookup/documentation
  "M-."   #'+lookup/definition
  "M-?"   #'+lookup/references
+
+ "M-]"   #'forward-paragraph
+ "M-["   #'backward-paragraph
 
  (:leader
    (:prefix "q"

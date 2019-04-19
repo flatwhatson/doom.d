@@ -9,12 +9,15 @@
 (package! flycheck-package)
 (package! gif-screencast)
 
-;; TODO objed doom compatibility
-(package! objed)
-
 ;; TODO keycast doom compatibility
 (package! keycast)
 
-;; HACK WIP swiper-isearch improvements
+;; HACK PR for hl-line fix
+;; https://github.com/clemera/objed/pull/50
+(package! objed
+  :recipe (:fetcher github :repo "flatwhatson/objed"))
+
+;; HACK PR for swiper-isearch improvements
+;; https://github.com/abo-abo/swiper/pull/2029
 (package! swiper
   :recipe (:fetcher github :repo "flatwhatson/swiper"))

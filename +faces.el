@@ -8,5 +8,4 @@
       (set-face-attribute
        face nil
        :foreground nil :distant-foreground nil :background nil
-       :weight 'bold :underline t))
-    ))
+       :weight 'bold :underline t))))
