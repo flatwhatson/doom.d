@@ -7,13 +7,9 @@
 
 ;; TODO sp: insert semicolon after enum/class/struct
 ;; TODO sp: insert namespace close comment
-;; TODO sp: multiline comment expansion (used to work?)
 ;; TODO sp: smarter arglist-close
 
 ;; TODO cc: fix inclass -> template-args-cont
-;; TODO cc: fix company firing on c-electric-slash
-;; TODO cc: fix c-electric-brace reformatting namespace close
-;; TODO cc: fix duplicate close-angle-brace on #include complete
 ;; TODO cc: expand-region support for template arguments
 
 ;; TODO flycheck: limit size of posframe for giant errors
@@ -28,7 +24,9 @@
 
 ;; TODO support naming buffers relative to project
 ;; TODO forward/backward-word whitespace handling
+
 ;; TODO save-place support for pdf-view-mode
+;;  - org-pdfview can bookmark into PDFs, maybe relevant
 
 ;; TODO improve projectile-find-other-file ordering (closest)
 ;; TODO improve counsel-recentf ordering (recent first)
