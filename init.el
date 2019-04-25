@@ -1,16 +1,6 @@
 ;;; ~/.doom.d/init.el -*- lexical-binding: t; -*-
 
-(doom! :feature
-       ;;debugger          ; FIXME stepping through code, to help you add bugs
-       eval              ; run code, run (also, repls)
-       ;;(evil +everywhere); come to the dark side, we have cookies
-       ;;file-templates    ; auto-snippets for empty files
-       (lookup           ; helps you navigate your code and documentation
-        +docsets)        ; ...or in Dash docsets locally
-       snippets          ; my elves. They type so I don't have to
-       workspaces        ; tab emulation, persistence & separate workspaces
-
-       :completion
+(doom! :completion
        (company          ; the ultimate code completion backend
         +auto
         +childframe)
@@ -40,8 +30,11 @@
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        window-select     ; visually switch windows
+       workspaces        ; tab emulation, persistence & separate workspaces
 
        :editor
+       ;;(evil +everywhere); come to the dark side, we have cookies
+       ;;file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
        ;;(format +onsave)  ; automated prettiness
        ;;lispy             ; vim for lisp, for people who dont like vim
@@ -49,6 +42,7 @@
        objed             ; text object editing for the innocent
        ;;parinfer          ; turn lisp into python, sort of
        rotate-text       ; cycle region at point between text candidates
+       snippets          ; my elves. They type so I don't have to
 
        :emacs
        (dired            ; making dired pretty [functional]
@@ -63,14 +57,18 @@
 
        :tools
        ;;ansible
+       ;;debugger          ; FIXME stepping through code, to help you add bugs
        ;;direnv
        ;;docker
        editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
+       eval              ; run code, run (also, repls)
        (flycheck         ; tasing you for every semicolon you forget
         +childframe)
        ;;flyspell          ; tasing you for misspelling mispelling
        ;;gist              ; interacting with github gists
+       (lookup           ; helps you navigate your code and documentation
+        +docsets)        ; ...or in Dash docsets locally
        lsp
        ;;macos             ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
