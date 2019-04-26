@@ -35,7 +35,7 @@
 ;; TODO investigate smooth scrolling options
 
 ;; TODO profile & improve lsp+cc performance
-;;  - https://github.com/victorhge/iedit/issues/83
+;; https://github.com/amosbird/serverconfig/blob/6e5723225bff9a9512c1c0e3ca4ae87f99f81b5d/.config/doom/modules/private/amos-cc/config.el#L285
 
 (setq-default
  doom-theme    'doom-tomorrow-night
@@ -51,7 +51,6 @@
  indent-tabs-mode nil
  tab-width 2
 
- +ivy-buffer-icons t
  +ivy-buffer-preview t
  +workspaces-on-switch-project-behavior nil
 
