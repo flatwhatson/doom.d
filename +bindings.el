@@ -16,6 +16,10 @@
  "M-["   #'backward-paragraph
 
  (:leader
+   (:prefix "f"
+     :desc "Move this file"          "m" #'doom/move-this-file)
+   (:prefix "p"
+     :desc "Kill project buffers"    "k" #'doom/kill-project-buffers)
    (:prefix "q"
      :desc "Restart Emacs"           "r" #'doom/restart
      :desc "Restart & restore Emacs" "R" #'doom/restart-and-restore))
@@ -32,6 +36,16 @@
      "RET"    #'ivy-alt-done
      [tab]    #'+ivy-partial-or-complete
      "TAB"    #'+ivy-partial-or-complete))
+
+ (:after company
+   (:map company-active-map
+     [tab] nil
+     "TAB" nil))
+
+ (:after yasnippet
+   (:map yas-keymap
+     [tab] #'yas-next-field
+     "TAB" #'yas-next-field))
 
  (:after flycheck
    (:map flycheck-mode-map

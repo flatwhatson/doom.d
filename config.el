@@ -5,9 +5,10 @@
 ;;  - hook to existing indent detection
 ;;  - customize indent multiplier per mode
 
-;; TODO sp: insert semicolon after enum/class/struct
-;; TODO sp: insert namespace close comment
-;; TODO sp: smarter arglist-close
+;; TODO cc+sp: insert semicolon after enum/class/struct
+;; TODO cc+sp: insert namespace close comment
+;; TODO cc+sp: smarter arglist-close
+;; TODO cc+sp: fix extra " or > on include completion
 
 ;; TODO cc: fix inclass -> template-args-cont
 ;; TODO cc: expand-region support for template arguments
@@ -54,6 +55,8 @@
  +ivy-buffer-preview t
  +workspaces-on-switch-project-behavior nil
 
+ which-key-idle-delay 0.5
+
  ;; NOTE last resort for debug messages from ccls
  ;;ccls-args '("-v=2" "-log-file=/tmp/ccls.log")
  ccls-initialization-options '(:index (:threads 2)))
@@ -83,6 +86,7 @@
 
 (after! lsp-ui
   (setq lsp-enable-indentation nil
+        lsp-enable-symbol-highlighting nil
         lsp-ui-sideline-enable nil))
 
 (after! projectile
