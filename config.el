@@ -103,9 +103,9 @@
     (+nav-flash|delayed-blink-cursor)))
 
 (after! org
-  (add-hook! :append 'org-mode-hook
-    (org-bullets-mode -1)
-    (smartparens-mode -1)))
+  (add-hook 'org-mode-hook #'turn-off-smartparens-mode)
+  (remove-hook 'org-mode-hook #'org-bullets-mode)
+  (remove-hook 'org-tab-first-hook #'+org|cycle-only-current-subtree))
 
 (after! python
   (setq python-indent-offset 2))
