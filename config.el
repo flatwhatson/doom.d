@@ -6,12 +6,7 @@
 ;;  - customize indent multiplier per mode
 
 ;; TODO cc+sp: insert semicolon after enum/class/struct
-;; TODO cc+sp: insert namespace close comment
-;; TODO cc+sp: smarter arglist-close
 ;; TODO cc+sp: fix extra " or > on include completion
-
-;; TODO cc: fix inclass -> template-args-cont
-;; TODO cc: expand-region support for template arguments
 
 ;; TODO flycheck: limit size of posframe for giant errors
 
@@ -23,17 +18,8 @@
 
 ;; TODO perl: configure cperl-mode for doom
 
-;; TODO support naming buffers relative to project
-;; TODO forward/backward-word whitespace handling
-
 ;; TODO save-place support for pdf-view-mode
 ;;  - org-pdfview can bookmark into PDFs, maybe relevant
-
-;; TODO improve projectile-find-other-file ordering (closest)
-;; TODO improve counsel-recentf ordering (recent first)
-;; TODO improve switch-workspace-buffer ordering (virtuals last)
-;; TODO stabilise +ivy/project-search order after ivy-resume
-;; TODO investigate smooth scrolling options
 
 ;; TODO profile & improve lsp+cc performance
 ;; https://github.com/amosbird/serverconfig/blob/6e5723225bff9a9512c1c0e3ca4ae87f99f81b5d/.config/doom/modules/private/amos-cc/config.el#L285
@@ -42,6 +28,8 @@
  doom-theme    'doom-tomorrow-night
  doom-font     (font-spec :family "Hack" :size (+hidpi-font-size 12))
  doom-big-font (font-spec :family "Hack" :size (+hidpi-font-size 18))
+
+ org-directory "~/Dropbox/org/"
 
  mouse-yank-at-point t
  set-mark-command-repeat-pop t
@@ -54,7 +42,8 @@
 
  +ivy-buffer-preview t
  +workspaces-on-switch-project-behavior nil
-
+ uniquify-buffer-name-style 'forward
+ vc-suppress-confirm t
  which-key-idle-delay 0.5
 
  ;; NOTE last resort for debug messages from ccls
@@ -63,8 +52,6 @@
 
 (save-place-mode +1)
 (global-subword-mode +1)
-
-(set-popup-rule! "^\\*Customize" :ignore t)
 
 (after! ivy
   (setq ivy-magic-tilde nil
@@ -98,10 +85,6 @@
 (after! hl-todo
   (add-to-list 'hl-todo-keyword-faces `("HACK" . ,(face-foreground 'warning))))
 
-(after! nav-flash
-  (add-hook! 'doom-enter-buffer-hook
-    (+nav-flash|delayed-blink-cursor)))
-
 (after! org
   (add-hook 'org-mode-hook #'turn-off-smartparens-mode)
   (remove-hook 'org-mode-hook #'org-bullets-mode)
@@ -133,8 +116,7 @@
 
   (after! smartparens
     (sp-local-pair 'c++-mode "(" nil :post-handlers '(:rem ("||\n[i]" "RET")))
-    (sp-local-pair 'c++-mode "{" nil :post-handlers '(:rem ("| "      "SPC")))
-    (sp-local-pair 'c++-mode "<" nil :actions nil))
+    (sp-local-pair 'c++-mode "{" nil :post-handlers '(:rem ("| "      "SPC"))))
 
   ;; HACK install bindings late as possible
   (add-transient-hook! 'c-mode-common-hook
@@ -182,6 +164,9 @@
   :defer t
   :init
   (global-set-key [remap goto-line] #'goto-line-preview))
+
+(def-package! org-pomodoro
+  :defer t)
 
 (def-package! pkgbuild-mode
   :defer t

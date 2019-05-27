@@ -7,6 +7,7 @@
  "C-x O" #'ace-swap-window
 
  "C-S-s" #'swiper-isearch
+ "C-'"   #'imenu
 
  "C-h ." #'+lookup/documentation
  "M-."   #'+lookup/definition
@@ -16,10 +17,15 @@
  "M-["   #'backward-paragraph
 
  (:leader
-   (:prefix "f"
-     :desc "Move this file"          "m" #'doom/move-this-file)
+
+   :desc "Org Pomodoro"              "P" #'org-pomodoro
+
+   (:prefix "o"
+     :desc "Ielm"                    "i" #'ielm)
+
    (:prefix "p"
      :desc "Kill project buffers"    "k" #'doom/kill-project-buffers)
+
    (:prefix "q"
      :desc "Restart Emacs"           "r" #'doom/restart
      :desc "Restart & restore Emacs" "R" #'doom/restart-and-restore))
