@@ -74,6 +74,7 @@
 
 (after! lsp-ui
   (setq lsp-enable-indentation nil
+        lsp-enable-on-type-formatting nil
         lsp-enable-symbol-highlighting nil
         lsp-ui-sideline-enable nil))
 
