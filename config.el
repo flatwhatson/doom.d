@@ -54,8 +54,9 @@
 (global-subword-mode +1)
 
 (after! ivy
-  (setq ivy-magic-tilde nil
-        ivy-extra-directories nil
+  (setq ivy-extra-directories nil
+        ivy-flx-limit 100000
+        ivy-magic-tilde nil
         ivy-use-virtual-buffers t
         ivy-virtual-abbreviate 'abbreviate))
 

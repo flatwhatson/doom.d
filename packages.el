@@ -13,7 +13,7 @@
 ;; TODO keycast doom compatibility
 (package! keycast)
 
-;; HACK pending PR for highlight fixes
+;; HACK pending PR for flx limit fix
 (package! ivy
   :recipe (:fetcher github :repo "flatwhatson/swiper"))
 
