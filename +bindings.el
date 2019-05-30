@@ -17,18 +17,25 @@
  "M-["   #'backward-paragraph
 
  (:leader
+   :desc "Org Pomodoro"                   "P" #'org-pomodoro
 
-   :desc "Org Pomodoro"              "P" #'org-pomodoro
+   (:prefix ("k" . "kill")
+     :desc "Kill 'em all!"                "A" #'doom/kill-all-buffers
+     :desc "Kill this buffer"             "b" #'doom/kill-this-buffer-in-all-windows
+     :desc "Kill other buffers"           "o" #'doom/kill-buried-buffers
+     :desc "Kill other buffers & windows" "O" #'doom/kill-other-buffers
+     :desc "Kill project buffers"         "p" #'doom/kill-project-buffers)
 
    (:prefix "o"
-     :desc "Ielm"                    "i" #'ielm)
-
-   (:prefix "p"
-     :desc "Kill project buffers"    "k" #'doom/kill-project-buffers)
+     :desc "Ielm"                         "i" #'ielm)
 
    (:prefix "q"
-     :desc "Restart Emacs"           "r" #'doom/restart
-     :desc "Restart & restore Emacs" "R" #'doom/restart-and-restore))
+     :desc "Restart Emacs"                "r" #'doom/restart
+     :desc "Restart & restore Emacs"      "R" #'doom/restart-and-restore)
+
+   (:prefix "/"
+     :desc "Search buffer"                "b" #'swiper-isearch
+     :desc "Find file in project"         "f" #'projectile-find-file))
 
  (:after isearch
    (:map isearch-mode-map

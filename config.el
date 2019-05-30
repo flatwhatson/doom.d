@@ -24,6 +24,7 @@
 ;; TODO profile & improve lsp+cc performance
 ;; https://github.com/amosbird/serverconfig/blob/6e5723225bff9a9512c1c0e3ca4ae87f99f81b5d/.config/doom/modules/private/amos-cc/config.el#L285
 
+
 (setq-default
  doom-theme    'doom-tomorrow-night
  doom-font     (font-spec :family "Hack" :size (+hidpi-font-size 12))
@@ -33,8 +34,6 @@
 
  mouse-yank-at-point t
  set-mark-command-repeat-pop t
- split-height-threshold nil
- split-width-threshold nil
  x-stretch-cursor t
 
  indent-tabs-mode nil
@@ -43,8 +42,6 @@
  +ivy-buffer-preview t
  +workspaces-on-switch-project-behavior nil
  uniquify-buffer-name-style 'forward
- vc-suppress-confirm t
- which-key-idle-delay 0.5
 
  ;; NOTE last resort for debug messages from ccls
  ;;ccls-args '("-v=2" "-log-file=/tmp/ccls.log")
@@ -53,24 +50,31 @@
 (save-place-mode +1)
 (global-subword-mode +1)
 
-(after! ivy
-  (setq ivy-extra-directories nil
-        ivy-flx-limit 100000
-        ivy-magic-tilde nil
-        ivy-use-virtual-buffers t
-        ivy-virtual-abbreviate 'abbreviate))
 
-(after! swiper
-  (setq swiper-goto-start-of-match t))
+(after! ace-window
+  (setq aw-swap-invert t))
 
 (after! company
   (setq company-minimum-prefix-length 2))
+
+(after! evil
+  (setq evil-want-fine-undo t))
+
+(after! evil-snipe
+  (setq evil-snipe-spillover-scope 'visible))
 
 (after! expand-region
   (setq expand-region-subword-enabled t))
 
 (after! flycheck
   (setq flycheck-display-errors-delay 0.1))
+
+(after! hl-todo
+  (add-to-list 'hl-todo-keyword-faces `("HACK" . ,(face-foreground 'warning))))
+
+(after! ivy
+  (setq ivy-extra-directories nil
+        ivy-magic-tilde nil))
 
 (after! lsp-ui
   (setq lsp-enable-indentation nil
@@ -81,11 +85,15 @@
 (after! projectile
   (setq projectile-indexing-method 'hybrid))
 
-(after! ace-window
-  (setq aw-swap-invert t))
+(after! swiper
+  (setq swiper-goto-start-of-match t))
 
-(after! hl-todo
-  (add-to-list 'hl-todo-keyword-faces `("HACK" . ,(face-foreground 'warning))))
+(after! vc
+  (setq vc-suppress-confirm t))
+
+(after! which-key
+  (setq which-key-idle-delay 0.5))
+
 
 (after! org
   (add-hook 'org-mode-hook #'turn-off-smartparens-mode)
@@ -144,6 +152,7 @@
    c-basic-offset tab-width
    +cc-default-header-file-mode 'c++-mode))
 
+
 (def-package! adaptive-wrap
   :hook (c-mode-common . +adaptive-wrap|init-cc-mode)
   :config
@@ -176,6 +185,7 @@
   (add-hook! 'pkgbuild-mode-hook
     (setq mode-name "PKGBUILD"
           mode-line-process nil)))
+
 
 (load! "+bindings")
 (load! "+faces")
