@@ -12,7 +12,3 @@
 
 ;; TODO keycast doom compatibility
 (package! keycast)
-
-;; HACK pending PR for non-greedy globbing
-(package! prescient
-  :recipe (:fetcher github :repo "flatwhatson/prescient.el"))
