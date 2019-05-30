@@ -95,15 +95,6 @@ currently selected candidate."
          (ivy-insert-current))))
 
 ;;;###autoload
-(defun +projectile-find-file-in-known-projects-other-window ()
-  "Jump to a file in any of the known projects."
-  (interactive)
-  (find-file-other-window
-   (projectile-completing-read
-    "Find file in projects: "
-    (projectile-all-project-files))))
-
-;;;###autoload
 (defun +insert-file-name-base ()
   "Insert the base name of the file visited by the current buffer."
   (interactive)

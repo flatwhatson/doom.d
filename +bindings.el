@@ -3,6 +3,7 @@
 (map!
 
  "C-x f" #'counsel-find-file
+ "C-x k" #'doom/kill-this-buffer-in-all-windows
  "C-x o" #'ace-window
  "C-x O" #'ace-swap-window
 
@@ -17,6 +18,7 @@
  "M-["   #'backward-paragraph
 
  (:leader
+   :desc "Switch to previous buffer"      "SPC" (λ! (switch-to-buffer (other-buffer)))
    :desc "Org Pomodoro"                   "P" #'org-pomodoro
 
    (:prefix ("k" . "kill")
@@ -35,7 +37,9 @@
 
    (:prefix "/"
      :desc "Search buffer"                "b" #'swiper-isearch
-     :desc "Find file in project"         "f" #'projectile-find-file))
+     :desc "Search current directory"     "d" #'+ivy/project-search-from-cwd
+     :desc "Find file in project"         "f" #'projectile-find-file
+     :desc "Search project"               "g" #'+ivy/project-search))
 
  (:after isearch
    (:map isearch-mode-map
@@ -68,13 +72,4 @@
  (:after pdf-view
    (:map pdf-view-mode-map
      "q" nil
-     "Q" nil))
-
- (:after projectile
-   (:map projectile-command-map
-     "f"   #'projectile-find-file
-     "4 f" #'projectile-find-file-other-window
-     "F"   #'projectile-find-file-in-known-projects
-     "4 F" #'+projectile-find-file-in-known-projects-other-window
-     "s"   #'+ivy/project-search
-     "S"   #'+ivy/project-search-from-cwd)))
+     "Q" nil)))
