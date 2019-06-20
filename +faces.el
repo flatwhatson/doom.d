@@ -1,6 +1,7 @@
 ;;; ~/.doom.d/+faces.el -*- lexical-binding: t; -*-
 
 (add-hook! 'doom-load-theme-hook
+
   (after! lsp
     (dolist (face '(lsp-face-highlight-read
                     lsp-face-highlight-write
@@ -8,4 +9,9 @@
       (set-face-attribute
        face nil
        :foreground nil :distant-foreground nil :background nil
-       :weight 'bold :underline t))))
+       :weight 'bold :underline t)))
+
+  (after! ivy
+    (set-face-attribute
+     'ivy-minibuffer-match-face-2 nil
+     :background nil)))

@@ -37,9 +37,11 @@
 
    (:prefix "/"
      :desc "Search buffer"                "b" #'swiper-isearch
-     :desc "Search current directory"     "d" #'+ivy/project-search-from-cwd
+     :desc "Search directory"             "d" #'+ivy/project-search-from-cwd
+     :desc "Search directory (all files)" "D" (λ! (+ivy/project-search-from-cwd t))
      :desc "Find file in project"         "f" #'projectile-find-file
-     :desc "Search project"               "g" #'+ivy/project-search))
+     :desc "Search project"               "p" #'+ivy/project-search
+     :desc "Search project (all files)"   "P" (λ! (+ivy/project-search t))))
 
  (:after isearch
    (:map isearch-mode-map

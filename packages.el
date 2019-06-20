@@ -5,6 +5,7 @@
 (package! google-c-style)
 (package! goto-line-preview)
 (package! org-pomodoro)
+(package! lsp-python-ms)
 (package! pkgbuild-mode)
 
 (package! flycheck-package)

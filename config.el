@@ -101,7 +101,8 @@
   (remove-hook 'org-tab-first-hook #'+org|cycle-only-current-subtree))
 
 (after! python
-  (setq python-indent-offset 2))
+  (setq python-indent-guess-indent-offset nil
+        python-indent-offset 2))
 
 (after! text-mode
   (add-to-list 'auto-mode-alist '("\\.log\\'" . text-mode))
@@ -178,6 +179,11 @@
 
 (def-package! org-pomodoro
   :defer t)
+
+(def-package! lsp-python-ms
+  :after lsp-mode
+  :init
+  (setq lsp-python-ms-executable "mspyls"))
 
 (def-package! pkgbuild-mode
   :defer t
