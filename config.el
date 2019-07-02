@@ -27,8 +27,8 @@
 
 (setq-default
  doom-theme    'doom-tomorrow-night
- doom-font     (font-spec :family "Hack" :size (+hidpi-font-size 12))
- doom-big-font (font-spec :family "Hack" :size (+hidpi-font-size 18))
+ doom-font     (font-spec :family "Hack" :size 12) ;(+hidpi-font-size 12))
+ doom-big-font (font-spec :family "Hack" :size 18) ;(+hidpi-font-size 18))
 
  org-directory "~/Dropbox/org/"
 
@@ -183,7 +183,8 @@
 (def-package! lsp-python-ms
   :after lsp-mode
   :init
-  (setq lsp-python-ms-executable "mspyls"))
+  (setq lsp-python-ms-dir "/usr/lib/microsoft-python-language-server"
+        lsp-python-ms-executable "/usr/bin/mspyls"))
 
 (def-package! pkgbuild-mode
   :defer t
