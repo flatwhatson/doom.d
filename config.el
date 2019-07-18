@@ -34,11 +34,15 @@
 
  mouse-yank-at-point t
  set-mark-command-repeat-pop t
+ split-height-threshold nil
+ split-width-threshold nil
  x-stretch-cursor t
 
  indent-tabs-mode nil
  tab-width 2
 
+ auto-revert-verbose nil
+ +evil-want-o/O-to-continue-comments nil
  +ivy-buffer-preview t
  +workspaces-on-switch-project-behavior nil
  uniquify-buffer-name-style 'forward
@@ -75,6 +79,13 @@
 (after! ivy
   (setq ivy-extra-directories nil
         ivy-magic-tilde nil))
+
+(after! (ivy projectile)
+  ;; HACK more actions for `projectile-find-other-file'
+  (require 'counsel-projectile)
+  (ivy-add-actions
+   'projectile-completing-read
+   (cdr counsel-projectile-find-file-action)))
 
 (after! lsp-ui
   (setq lsp-enable-indentation nil
