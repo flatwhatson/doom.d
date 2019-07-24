@@ -24,7 +24,6 @@
 ;; TODO profile & improve lsp+cc performance
 ;; https://github.com/amosbird/serverconfig/blob/6e5723225bff9a9512c1c0e3ca4ae87f99f81b5d/.config/doom/modules/private/amos-cc/config.el#L285
 
-
 (setq-default
  doom-theme    'doom-tomorrow-night
  doom-font     (font-spec :family "Hack" :size 12) ;(+hidpi-font-size 12))
@@ -183,11 +182,6 @@
   :config
   (c-add-style "Google" google-c-style))
 
-(def-package! goto-line-preview
-  :defer t
-  :init
-  (global-set-key [remap goto-line] #'goto-line-preview))
-
 (def-package! org-pomodoro
   :defer t)
 
@@ -203,6 +197,9 @@
   (add-hook! 'pkgbuild-mode-hook
     (setq mode-name "PKGBUILD"
           mode-line-process nil)))
+
+(def-package! doom-community-themes
+  :after doom-themes)
 
 
 (load! "+bindings")
