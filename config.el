@@ -48,7 +48,10 @@
 
  ;; NOTE last resort for debug messages from ccls
  ;;ccls-args '("-v=2" "-log-file=/tmp/ccls.log")
- ccls-initialization-options '(:index (:threads 2)))
+ ccls-initialization-options '(:index (:threads 2))
+
+ lsp-python-ms-dir "/usr/lib/microsoft-python-language-server"
+ lsp-python-ms-executable "/usr/bin/mspyls")
 
 (save-place-mode +1)
 (global-subword-mode +1)
@@ -185,21 +188,12 @@
 (def-package! org-pomodoro
   :defer t)
 
-(def-package! lsp-python-ms
-  :after lsp-mode
-  :init
-  (setq lsp-python-ms-dir "/usr/lib/microsoft-python-language-server"
-        lsp-python-ms-executable "/usr/bin/mspyls"))
-
 (def-package! pkgbuild-mode
   :defer t
   :config
   (add-hook! 'pkgbuild-mode-hook
     (setq mode-name "PKGBUILD"
           mode-line-process nil)))
-
-(def-package! doom-community-themes
-  :after doom-themes)
 
 
 (load! "+bindings")

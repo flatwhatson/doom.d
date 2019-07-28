@@ -7,11 +7,6 @@
 (package! org-pomodoro)
 (package! pkgbuild-mode)
 
-;; HACK doom-community-themes waiting on MELPA
-;; https://github.com/melpa/melpa/pull/6324
-(package! doom-community-themes
-  :recipe (:host github :repo "Emiller88/emacs-doom-community-themes"))
-
 ;; FIXME straight.el doesn't respect repo's default branch
 ;; https://github.com/raxod502/straight.el/issues/279
 (package! google-c-style
