@@ -75,9 +75,6 @@
 (after! flycheck
   (setq flycheck-display-errors-delay 0.1))
 
-(after! hl-todo
-  (add-to-list 'hl-todo-keyword-faces `("HACK" . ,(face-foreground 'warning))))
-
 (after! ivy
   (setq ivy-extra-directories nil
         ivy-magic-tilde nil))
