@@ -139,10 +139,7 @@
     (sp-local-pair 'c++-mode "(" nil :post-handlers '(:rem ("||\n[i]" "RET")))
     (sp-local-pair 'c++-mode "{" nil :post-handlers '(:rem ("| "      "SPC"))))
 
-  ;; HACK install bindings late as possible
-  (add-transient-hook! 'c-mode-common-hook
-    (map! :map c-mode-base-map
-        ":" #'+cc-better-electric-colon))
+  (advice-add 'c-electric-colon :after #'+cc-better-electric-colon-a)
 
   (c-add-style
    "flat" '("Google"

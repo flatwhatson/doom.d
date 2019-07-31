@@ -63,16 +63,13 @@ On high DPI 14\" 1440p display: 12 -> 18"
       (c-calc-offset (cons symbol (cdr langelem))))))
 
 ;;;###autoload
-(defun +cc-better-electric-colon (arg)
-  "Insert a colon, maybe re-indent, then maybe complete."
-  (interactive "*P")
-  (c-electric-colon arg)
+(defun +cc-better-electric-colon-a (arg)
+  "Only auto-complete after TWO colons."
   (when (and company-mode
              (eq major-mode 'c++-mode)
-             (eq (char-before (point)) ?:))
-    (company-cancel)
-    (when (eq (char-before (1- (point))) ?:)
-      (company-auto-begin))))
+             (eq (char-before (point)) ?:)
+             (not (eq (char-before (1- (point))) ?:)))
+    (company-cancel)))
 
 ;;;###autoload
 (defun +isearch-exit-start-of-match ()
