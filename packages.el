@@ -3,7 +3,6 @@
 
 (package! adaptive-wrap)
 (package! flycheck-package)
-(package! lsp-python-ms)
 (package! org-pomodoro)
 (package! pkgbuild-mode)
 
