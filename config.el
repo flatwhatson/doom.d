@@ -108,7 +108,8 @@
 (after! org
   (add-hook 'org-mode-hook #'turn-off-smartparens-mode)
   (remove-hook 'org-mode-hook #'org-bullets-mode)
-  (remove-hook 'org-tab-first-hook #'+org|cycle-only-current-subtree))
+  (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h)
+  (add-to-list 'evil-org-key-theme 'additional))
 
 (after! python
   (setq python-indent-guess-indent-offset nil
