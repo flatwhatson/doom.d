@@ -1,7 +1,6 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; ~/.doom.d/packages.el
 
-(package! adaptive-wrap)
 (package! flycheck-package)
 (package! org-pomodoro)
 (package! pkgbuild-mode)

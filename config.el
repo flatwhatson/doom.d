@@ -53,8 +53,10 @@
  lsp-python-ms-dir "/usr/lib/microsoft-python-language-server"
  lsp-python-ms-executable "/usr/bin/mspyls")
 
+
 (save-place-mode +1)
 (global-subword-mode +1)
+(+global-word-wrap-mode +1)
 
 
 (after! ace-window
@@ -161,14 +163,6 @@
    c-basic-offset tab-width
    +cc-default-header-file-mode 'c++-mode))
 
-
-(def-package! adaptive-wrap
-  :hook (c-mode-common . +adaptive-wrap|init-cc-mode)
-  :config
-  (defun +adaptive-wrap|init-cc-mode ()
-    (setq adaptive-wrap-extra-indent (* c-basic-offset 2))
-    (adaptive-wrap-prefix-mode +1)
-    (visual-line-mode +1)))
 
 (def-package! flycheck-package
   :after flycheck
