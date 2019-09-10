@@ -63,7 +63,8 @@
   (setq aw-swap-invert t))
 
 (after! company
-  (setq company-minimum-prefix-length 2))
+  (setq company-idle-delay 0.2
+        company-minimum-prefix-length 2))
 
 (after! evil
   (setq evil-want-fine-undo t))
