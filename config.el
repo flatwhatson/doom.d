@@ -1,10 +1,5 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-;; TODO polish & submit adaptive-wrap feature
-;;  - new modules/editor/adaptive-wrap
-;;  - hook to existing indent detection
-;;  - customize indent multiplier per mode
-
 ;; TODO cc+sp: insert semicolon after enum/class/struct
 ;; TODO cc+sp: fix extra " or > on include completion
 
@@ -20,9 +15,6 @@
 
 ;; TODO save-place support for pdf-view-mode
 ;;  - org-pdfview can bookmark into PDFs, maybe relevant
-
-;; TODO profile & improve lsp+cc performance
-;; https://github.com/amosbird/serverconfig/blob/6e5723225bff9a9512c1c0e3ca4ae87f99f81b5d/.config/doom/modules/private/amos-cc/config.el#L285
 
 (setq-default
  doom-theme    'doom-tomorrow-night
