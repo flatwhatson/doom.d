@@ -85,6 +85,7 @@
   (setq lsp-enable-indentation nil
         lsp-enable-on-type-formatting nil
         lsp-enable-symbol-highlighting nil
+        lsp-file-watch-threshold nil
         lsp-ui-sideline-enable nil))
 
 (after! projectile
