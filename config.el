@@ -16,10 +16,14 @@
 ;; TODO save-place support for pdf-view-mode
 ;;  - org-pdfview can bookmark into PDFs, maybe relevant
 
+;; HACK ensure emacs gets focus (eg. after restart)
+(add-hook! 'window-setup-hook
+  (select-frame-set-input-focus (selected-frame)))
+
 (setq-default
  doom-theme    'doom-tomorrow-night
- doom-font     (font-spec :family "Hack" :size 12) ;(+hidpi-font-size 12))
- doom-big-font (font-spec :family "Hack" :size 18) ;(+hidpi-font-size 18))
+ doom-font     (font-spec :family "Hack" :size (+hidpi-font-size 12))
+ doom-big-font (font-spec :family "Hack" :size (+hidpi-font-size 18))
 
  org-directory "~/Dropbox/org/"
 
