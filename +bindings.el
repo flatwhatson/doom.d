@@ -19,7 +19,6 @@
 
  (:leader
    :desc "Switch to previous buffer"      "SPC" (λ! (switch-to-buffer (other-buffer)))
-   :desc "Org Pomodoro"                   "P" #'org-pomodoro
 
    (:prefix ("k" . "kill")
      :desc "Kill 'em all!"                "A" #'doom/kill-all-buffers

@@ -2,7 +2,6 @@
 ;;; ~/.doom.d/packages.el
 
 (package! flycheck-package)
-(package! org-pomodoro)
 (package! pkgbuild-mode)
 
 ;; FIXME straight.el doesn't respect repo's default branch

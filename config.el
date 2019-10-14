@@ -20,6 +20,10 @@
 (add-hook! 'window-setup-hook
   (select-frame-set-input-focus (selected-frame)))
 
+;; HACK fat projectile cache slows things down
+(add-hook! 'kill-emacs-hook
+  (delete-file projectile-cache-file))
+
 (setq-default
  doom-theme    'doom-tomorrow-night
  doom-font     (font-spec :family "Hack" :size (+hidpi-font-size 12))
@@ -171,9 +175,6 @@
   :after cc-mode
   :config
   (c-add-style "Google" google-c-style))
-
-(def-package! org-pomodoro
-  :defer t)
 
 (def-package! pkgbuild-mode
   :defer t
