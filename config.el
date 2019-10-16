@@ -90,11 +90,12 @@
    (cdr counsel-projectile-find-file-action)))
 
 (after! lsp-ui
-  (setq lsp-enable-indentation nil
+  (setq lsp-document-highlight-delay 0.5
+        lsp-enable-indentation nil
         lsp-enable-on-type-formatting nil
-        lsp-enable-symbol-highlighting nil
         lsp-file-watch-threshold nil
-        lsp-ui-sideline-enable nil))
+        lsp-ui-sideline-enable nil)
+  (set-lookup-handlers! 'lsp-ui-mode nil))
 
 (after! projectile
   (setq projectile-indexing-method 'hybrid))
