@@ -40,7 +40,6 @@
  indent-tabs-mode nil
  tab-width 2
 
- auto-revert-verbose nil
  +evil-want-o/O-to-continue-comments nil
  +ivy-buffer-preview t
  +workspaces-on-switch-project-behavior nil
@@ -54,7 +53,6 @@
  lsp-python-ms-executable "/usr/bin/mspyls")
 
 
-(save-place-mode +1)
 (global-subword-mode +1)
 (+global-word-wrap-mode +1)
 
@@ -62,9 +60,15 @@
 (after! ace-window
   (setq aw-swap-invert t))
 
+(after! autorevert
+  (setq auto-revert-verbose nil))
+
 (after! company
   (setq company-idle-delay 0.2
         company-minimum-prefix-length 2))
+
+(after! counsel
+  (setq counsel-compile-build-directories nil))
 
 (after! evil
   (setq evil-want-fine-undo t))
@@ -113,8 +117,7 @@
 (after! org
   (add-hook 'org-mode-hook #'turn-off-smartparens-mode)
   (remove-hook 'org-mode-hook #'org-bullets-mode)
-  (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h)
-  (add-to-list 'evil-org-key-theme 'additional))
+  (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
 
 (after! python
   (setq python-indent-guess-indent-offset nil
@@ -124,14 +127,10 @@
   (add-to-list 'auto-mode-alist '("\\.log\\'" . text-mode))
 
   (add-hook! 'text-mode-hook
-    (visual-line-mode +1)
-
-    ;; display ansi color codes
-    ;; FIXME do this without modifying buffer
-    (let ((inhibit-read-only t))
+    ;; Apply ANSI color codes
+    (with-silent-modifications
       (ansi-color-apply-on-region (point-min) (point-max)))
-
-    ;; hide dos eol markers
+    ;; Hide DOS EOL markers
     (setq buffer-display-table (make-display-table))
     (aset buffer-display-table ?\^M [])))
 
