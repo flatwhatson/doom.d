@@ -29,6 +29,8 @@
  doom-font     (font-spec :family "Hack" :size (+hidpi-font-size 12))
  doom-big-font (font-spec :family "Hack" :size (+hidpi-font-size 18))
 
+ doom-leader-alt-key "S-SPC"
+
  org-directory "~/Dropbox/org/"
 
  mouse-yank-at-point t
@@ -52,9 +54,14 @@
  lsp-python-ms-dir "/usr/lib/microsoft-python-language-server"
  lsp-python-ms-executable "/usr/bin/mspyls")
 
-
 (global-subword-mode +1)
 (+global-word-wrap-mode +1)
+
+(dolist (path '("^/usr/local/"
+                "/\\.emacs\\.d/core"
+                "/\\.emacs\\.d/modules"
+                "/\\.emacs\\.d/\\.local/straight/repos"))
+  (add-to-list 'auto-minor-mode-alist (cons path 'read-only-mode)))
 
 
 (after! ace-window
@@ -124,8 +131,6 @@
         python-indent-offset 2))
 
 (after! text-mode
-  (add-to-list 'auto-mode-alist '("\\.log\\'" . text-mode))
-
   (add-hook! 'text-mode-hook
     ;; Apply ANSI color codes
     (with-silent-modifications

@@ -2,23 +2,19 @@
 
 (map!
 
- "C-x f" #'counsel-find-file
- "C-x k" #'doom/kill-this-buffer-in-all-windows
- "C-x o" #'ace-window
- "C-x O" #'ace-swap-window
-
- "C-S-s" #'swiper-isearch
- "C-'"   #'imenu
-
- "C-h ." #'+lookup/documentation
- "M-."   #'+lookup/definition
- "M-?"   #'+lookup/references
-
- "M-]"   #'forward-paragraph
- "M-["   #'backward-paragraph
+ "C-'"          #'imenu
+ [remap swiper] #'swiper-isearch
 
  (:leader
    :desc "Switch to previous buffer"      "SPC" (λ! (switch-to-buffer (other-buffer)))
+
+   (:prefix "f"
+     :desc "Save file"                    "s" #'save-buffer
+     :desc "Save file (prompt)"           "S" #'write-file)
+
+   (:prefix "i"
+     :desc "Current file name"            "f" (λ! (insert (file-name-nondirectory buffer-file-name)))
+     :desc "Current file path"            "p" (λ! (insert (abbreviate-file-name buffer-file-name))))
 
    (:prefix ("k" . "kill")
      :desc "Kill 'em all!"                "A" #'doom/kill-all-buffers
@@ -30,17 +26,24 @@
    (:prefix "o"
      :desc "Ielm"                         "i" #'ielm)
 
+   (:prefix "p"
+     :desc "Find file in project"         "f" #'projectile-find-file
+     :desc "Find file in other project"   "F" #'doom/find-file-in-other-project)
+
    (:prefix "q"
      :desc "Restart Emacs"                "r" #'doom/restart
      :desc "Restart & restore Emacs"      "R" #'doom/restart-and-restore)
 
+   (:prefix "t"
+     :desc "Read-only mode"               "r" #'read-only-mode)
+
    (:prefix "/"
-     :desc "Search buffer"                "b" #'swiper-isearch
-     :desc "Search directory"             "d" #'+ivy/project-search-from-cwd
-     :desc "Search directory (all files)" "D" (λ! (+ivy/project-search-from-cwd t))
-     :desc "Find file in project"         "f" #'projectile-find-file
-     :desc "Search project"               "p" #'+ivy/project-search
-     :desc "Search project (all files)"   "P" (λ! (+ivy/project-search t))))
+     :desc "Search directory"                 "d" #'+ivy/project-search-from-cwd
+     :desc "Search directory (all files)"     "D" (λ!! #'+ivy/project-search-from-cwd t)
+     :desc "Search project"                   "p" #'+ivy/project-search
+     :desc "Search project (all files)"       "P" (λ!! #'+ivy/project-search t)
+     :desc "Search other project"             "o" #'+ivy/other-project-search
+     :desc "Search other project (all files)" "O" (λ!! #'+ivy/other-project-search t)))
 
  (:after isearch
    (:map isearch-mode-map

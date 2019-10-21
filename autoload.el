@@ -50,6 +50,7 @@ On high DPI 14\" 1440p display: 12 -> 18"
 ;;;###autoload
 (defun +cc-better-arglist-close (langelem)
   "Indent arglist-close as though the closing paren was not present."
+  ;; TODO indent unless followed by ; or {
   (let ((symbol
          (save-excursion
            (save-match-data
@@ -92,7 +93,16 @@ currently selected candidate."
          (ivy-insert-current))))
 
 ;;;###autoload
-(defun +insert-file-name-base ()
-  "Insert the base name of the file visited by the current buffer."
-  (interactive)
-  (insert (file-name-base)))
+(defun +ivy/other-project-search (&optional arg initial-query directory)
+  "Performs a project search from the project root.
+
+Uses the first available search backend from `+ivy-project-search-engines'. If
+ARG (universal argument), include all files, even hidden or compressed ones, in
+the search."
+  (interactive "P")
+  (let ((directory (or directory
+                       (if-let (projects (projectile-relevant-known-projects))
+                           (completing-read "Search project: " projects
+                                            nil t nil nil (doom-project-root))
+                         (user-error "There are no known projects")))))
+    (+ivy/project-search arg initial-query directory)))
