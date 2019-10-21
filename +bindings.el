@@ -8,10 +8,6 @@
  (:leader
    :desc "Switch to previous buffer"      "SPC" (λ! (switch-to-buffer (other-buffer)))
 
-   (:prefix "f"
-     :desc "Save file"                    "s" #'save-buffer
-     :desc "Save file (prompt)"           "S" #'write-file)
-
    (:prefix "i"
      :desc "Current file name"            "f" (λ! (insert (file-name-nondirectory buffer-file-name)))
      :desc "Current file path"            "p" (λ! (insert (abbreviate-file-name buffer-file-name))))
