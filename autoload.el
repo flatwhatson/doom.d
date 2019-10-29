@@ -93,16 +93,17 @@ currently selected candidate."
          (ivy-insert-current))))
 
 ;;;###autoload
-(defun +ivy/other-project-search (&optional arg initial-query directory)
-  "Performs a project search from the project root.
-
-Uses the first available search backend from `+ivy-project-search-engines'. If
-ARG (universal argument), include all files, even hidden or compressed ones, in
-the search."
+(defun +ivy/project-search-emacsd (&optional arg initial-query)
+  "Perform a project search in `doom-emacs-dir'."
   (interactive "P")
-  (let ((directory (or directory
+  (+ivy/project-search arg initial-query doom-emacs-dir))
+
+;;;###autoload
+(defun +ivy/other-project-search (&optional arg initial-query)
+  "Prompt for a project, then search from the project root."
+  (interactive "P")
+  (+ivy/project-search arg initial-query
                        (if-let (projects (projectile-relevant-known-projects))
                            (completing-read "Search project: " projects
                                             nil t nil nil (doom-project-root))
-                         (user-error "There are no known projects")))))
-    (+ivy/project-search arg initial-query directory)))
+                         (user-error "There are no known projects"))))

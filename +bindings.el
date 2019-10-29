@@ -6,7 +6,9 @@
  [remap swiper] #'swiper-isearch
 
  (:leader
-   :desc "Switch to previous buffer"      "SPC" (λ! (switch-to-buffer (other-buffer)))
+   :desc "Switch to previous buffer" "SPC" #'evil-switch-to-windows-last-buffer
+   :desc "M-x"                       ";"   #'execute-extended-command
+   :desc "Eval expression"           ":"   #'eval-expression
 
    (:prefix "i"
      :desc "Current file name"            "f" (λ! (insert (file-name-nondirectory buffer-file-name)))
@@ -30,12 +32,11 @@
      :desc "Restart Emacs"                "r" #'doom/restart
      :desc "Restart & restore Emacs"      "R" #'doom/restart-and-restore)
 
-   (:prefix "t"
-     :desc "Read-only mode"               "r" #'read-only-mode)
-
    (:prefix "/"
      :desc "Search directory"                 "d" #'+ivy/project-search-from-cwd
      :desc "Search directory (all files)"     "D" (λ!! #'+ivy/project-search-from-cwd t)
+     :desc "Search emacs.d"                   "e" #'+ivy/project-search-emacsd
+     :desc "Search emacs.d (all files)"       "E" (λ!! #'+ivy/project-search-emacsd t)
      :desc "Search project"                   "p" #'+ivy/project-search
      :desc "Search project (all files)"       "P" (λ!! #'+ivy/project-search t)
      :desc "Search other project"             "o" #'+ivy/other-project-search
