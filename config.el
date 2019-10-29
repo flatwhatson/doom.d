@@ -42,7 +42,6 @@
  indent-tabs-mode nil
  tab-width 2
 
- +evil-want-o/O-to-continue-comments nil
  +ivy-buffer-preview t
  +workspaces-on-switch-project-behavior nil
  uniquify-buffer-name-style 'forward
@@ -54,14 +53,19 @@
  lsp-python-ms-dir "/usr/lib/microsoft-python-language-server"
  lsp-python-ms-executable "/usr/bin/mspyls")
 
-(global-subword-mode +1)
-(+global-word-wrap-mode +1)
-
 (dolist (path '("^/usr/local/"
                 "/\\.emacs\\.d/core"
                 "/\\.emacs\\.d/modules"
                 "/\\.emacs\\.d/\\.local/straight/repos"))
   (add-to-list 'auto-minor-mode-alist (cons path 'read-only-mode)))
+
+(defun +projectile-ignore-project-p (project-root)
+  (string-match-p "/\\.emacs\\.d/\\.local/straight/repos" project-root))
+
+(add-hook! 'doom-init-ui-hook
+  (global-page-break-lines-mode +1)
+  (global-subword-mode +1)
+  (+global-word-wrap-mode +1))
 
 
 (after! ace-window
@@ -80,8 +84,18 @@
 (after! evil
   (setq evil-want-fine-undo t))
 
+(after! evil-collection-outline
+  ;; HACK https://github.com/emacs-evil/evil-collection/pull/275
+  (setq evil-collection-outline-bind-tab-p nil))
+
+(after! evil-org
+  (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
+
 (after! evil-snipe
-  (setq evil-snipe-spillover-scope 'visible))
+  (setq evil-snipe-repeat-keys t
+        evil-snipe-scope 'whole-visible
+        evil-snipe-repeat-scope 'whole-visible
+        evil-snipe-spillover-scope 'whole-buffer))
 
 (after! expand-region
   (setq expand-region-subword-enabled t))
@@ -108,8 +122,13 @@
         lsp-ui-sideline-enable nil)
   (set-lookup-handlers! 'lsp-ui-mode nil))
 
+(after! org
+  (add-hook 'org-mode-hook #'turn-off-smartparens-mode)
+  (remove-hook 'org-mode-hook #'org-bullets-mode))
+
 (after! projectile
-  (setq projectile-indexing-method 'hybrid))
+  (setq projectile-indexing-method 'hybrid
+        projectile-ignored-project-function #'+projectile-ignore-project-p))
 
 (after! swiper
   (setq swiper-goto-start-of-match t))
@@ -120,11 +139,6 @@
 (after! which-key
   (setq which-key-idle-delay 0.5))
 
-
-(after! org
-  (add-hook 'org-mode-hook #'turn-off-smartparens-mode)
-  (remove-hook 'org-mode-hook #'org-bullets-mode)
-  (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
 
 (after! python
   (setq python-indent-guess-indent-offset nil
