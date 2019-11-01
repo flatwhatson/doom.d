@@ -185,17 +185,17 @@
    +cc-default-header-file-mode 'c++-mode))
 
 
-(def-package! flycheck-package
+(use-package! flycheck-package
   :after flycheck
   :config
   (flycheck-package-setup))
 
-(def-package! google-c-style
+(use-package! google-c-style
   :after cc-mode
   :config
   (c-add-style "Google" google-c-style))
 
-(def-package! pkgbuild-mode
+(use-package! pkgbuild-mode
   :defer t
   :config
   (add-hook! 'pkgbuild-mode-hook
