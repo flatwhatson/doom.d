@@ -5,12 +5,6 @@
 
 ;; TODO flycheck: limit size of posframe for giant errors
 
-;; TODO ccls: look for */compile_commands.json
-;;  - set compilationDatabaseDirectory in ccls-initialization-options
-;;  - needs to be a per-project setting...
-
-;; TODO pkgbuild-mode: customize faces
-
 ;; TODO perl: configure cperl-mode for doom
 
 ;; TODO save-place support for pdf-view-mode
@@ -83,10 +77,6 @@
 
 (after! evil
   (setq evil-want-fine-undo t))
-
-(after! evil-collection-outline
-  ;; HACK https://github.com/emacs-evil/evil-collection/pull/275
-  (setq evil-collection-outline-bind-tab-p nil))
 
 (after! evil-org
   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
