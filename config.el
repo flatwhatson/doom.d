@@ -32,6 +32,7 @@
  split-height-threshold nil
  split-width-threshold nil
  x-stretch-cursor t
+ shr-use-fonts nil
 
  indent-tabs-mode nil
  tab-width 2
@@ -143,6 +144,10 @@
     (setq buffer-display-table (make-display-table))
     (aset buffer-display-table ?\^M [])))
 
+(after! cmake-mode
+  (after! smartparens
+    (sp-local-pair 'cmake-mode "(" nil :post-handlers '(:rem ("||\n[i]" "RET")))))
+
 (after! cc-mode
   (add-to-list 'auto-mode-alist '("\\.ipp\\'" . c++-mode))
 
@@ -175,6 +180,12 @@
    +cc-default-header-file-mode 'c++-mode))
 
 
+(use-package! evil-lisp-state
+  :init
+  (setq evil-lisp-state-global t)
+  :config
+  (map! :leader "l" evil-lisp-state-map))
+
 (use-package! flycheck-package
   :after flycheck
   :config
@@ -195,3 +206,4 @@
 
 (load! "+bindings")
 (load! "+faces")
+(load! "+secret" nil t)

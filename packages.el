@@ -1,6 +1,7 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; ~/.doom.d/packages.el
 
+(package! evil-lisp-state)
 (package! flycheck-package)
 (package! page-break-lines)
 (package! pkgbuild-mode)
