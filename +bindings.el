@@ -10,10 +10,6 @@
    :desc "M-x"                       ";"   #'execute-extended-command
    :desc "Eval expression"           ":"   #'eval-expression
 
-   (:prefix "i"
-     :desc "Current file name"            "f" (λ! (insert (file-name-nondirectory buffer-file-name)))
-     :desc "Current file path"            "p" (λ! (insert (abbreviate-file-name buffer-file-name))))
-
    (:prefix ("k" . "kill")
      :desc "Kill 'em all!"                "A" #'doom/kill-all-buffers
      :desc "Kill this buffer"             "b" #'doom/kill-this-buffer-in-all-windows
@@ -24,15 +20,11 @@
    (:prefix "o"
      :desc "Ielm"                         "i" #'ielm)
 
-   (:prefix "p"
-     :desc "Find file in project"         "f" #'projectile-find-file
-     :desc "Find file in other project"   "F" #'doom/find-file-in-other-project)
-
    (:prefix "q"
      :desc "Restart Emacs"                "r" #'doom/restart
      :desc "Restart & restore Emacs"      "R" #'doom/restart-and-restore)
 
-   (:prefix "/"
+   (:prefix "s"
      :desc "Search directory"                 "d" #'+ivy/project-search-from-cwd
      :desc "Search directory (all files)"     "D" (λ!! #'+ivy/project-search-from-cwd t)
      :desc "Search emacs.d"                   "e" #'+ivy/project-search-emacsd
