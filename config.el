@@ -130,6 +130,8 @@
 (after! which-key
   (setq which-key-idle-delay 0.5))
 
+(after! js2-mode
+  (setq js2-basic-offset 2))
 
 (after! python
   (setq python-indent-guess-indent-offset nil
