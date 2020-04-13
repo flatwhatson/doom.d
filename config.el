@@ -14,10 +14,6 @@
 (add-hook! 'window-setup-hook
   (select-frame-set-input-focus (selected-frame)))
 
-;; HACK fat projectile cache slows things down
-(add-hook! 'kill-emacs-hook
-  (delete-file projectile-cache-file))
-
 (setq-default
  doom-theme    'doom-tomorrow-night
  doom-font     (font-spec :family "Hack" :size (+hidpi-font-size 12))
@@ -45,8 +41,7 @@
  ;;ccls-args '("-v=2" "-log-file=/tmp/ccls.log")
  ccls-initialization-options '(:index (:threads 2))
 
- lsp-python-ms-dir "/usr/lib/microsoft-python-language-server"
- lsp-python-ms-executable "/usr/bin/mspyls")
+ which-key-idle-delay 0.5)
 
 (dolist (path '("^/usr/local/"
                 "/\\.emacs\\.d/core"
@@ -126,9 +121,6 @@
 
 (after! vc
   (setq vc-suppress-confirm t))
-
-(after! which-key
-  (setq which-key-idle-delay 0.5))
 
 (after! js2-mode
   (setq js2-basic-offset 2))
