@@ -109,7 +109,7 @@
 
 (after! org
   (add-hook 'org-mode-hook #'turn-off-smartparens-mode)
-  (remove-hook 'org-mode-hook #'org-bullets-mode))
+  (remove-hook 'org-mode-hook #'org-superstar-mode))
 
 (after! projectile
   (setq projectile-indexing-method 'hybrid
