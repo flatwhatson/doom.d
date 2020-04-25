@@ -34,6 +34,7 @@
  tab-width 2
 
  +ivy-buffer-preview t
+ +lsp-company-backend 'company-capf
  +workspaces-on-switch-project-behavior nil
  uniquify-buffer-name-style 'forward
 
