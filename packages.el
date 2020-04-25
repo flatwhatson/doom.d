@@ -3,7 +3,6 @@
 
 (package! evil-lisp-state)
 (package! flycheck-package)
-(package! page-break-lines)
 (package! pkgbuild-mode)
 
 ;; FIXME straight.el doesn't respect repo's default branch

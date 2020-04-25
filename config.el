@@ -53,7 +53,6 @@
   (string-match-p "/\\.emacs\\.d/\\.local/straight/repos" project-root))
 
 (add-hook! 'doom-init-ui-hook
-  (global-page-break-lines-mode +1)
   (global-subword-mode +1)
   (+global-word-wrap-mode +1))
 
