@@ -38,7 +38,6 @@
  tab-width 2
 
  +ivy-buffer-preview t
- +lsp-company-backend 'company-capf
  +workspaces-on-switch-project-behavior nil
  uniquify-buffer-name-style 'forward
 
@@ -111,6 +110,8 @@
         lsp-file-watch-threshold nil
         lsp-ui-sideline-enable nil)
   (set-lookup-handlers! 'lsp-ui-mode nil))
+
+(advice-add #'lsp--find-root-interactively :override #'ignore)
 
 (after! org
   (add-hook 'org-mode-hook #'turn-off-smartparens-mode)
