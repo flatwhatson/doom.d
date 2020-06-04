@@ -37,13 +37,16 @@
  indent-tabs-mode nil
  tab-width 2
 
- +ivy-buffer-preview t
  +workspaces-on-switch-project-behavior nil
  uniquify-buffer-name-style 'forward
 
- ;; NOTE last resort for debug messages from ccls
- ;;ccls-args '("-v=2" "-log-file=/tmp/ccls.log")
  ccls-initialization-options '(:index (:threads 2))
+
+ lsp-clients-clangd-args '("-j=2"
+                           "--background-index"
+                           "--clang-tidy"
+                           "--completion-style=detailed"
+                           "--header-insertion=never")
 
  which-key-idle-delay 0.5)
 
