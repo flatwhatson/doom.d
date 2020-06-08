@@ -34,6 +34,10 @@
      :desc "Search other project"             "o" #'+ivy/other-project-search
      :desc "Search other project (all files)" "O" (λ!! #'+ivy/other-project-search t)))
 
+ (:after evil
+  (:map evil-window-map
+   "f" #'delete-other-windows))
+
  (:after isearch
    (:map isearch-mode-map
      [return] #'+isearch-exit-start-of-match
