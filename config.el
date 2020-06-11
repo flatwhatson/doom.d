@@ -95,6 +95,9 @@
 (after! flycheck
   (setq flycheck-display-errors-delay 0.1))
 
+(after! info
+  (advice-add #'Info-up :after #'doom-recenter-a))
+
 (after! ivy
   (setq ivy-extra-directories nil
         ivy-magic-tilde nil))
@@ -210,4 +213,5 @@
 
 (load! "+bindings")
 (load! "+faces")
+(load! "+popups")
 (load! "+secret" nil t)
