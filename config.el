@@ -39,6 +39,7 @@
 
  +workspaces-on-switch-project-behavior nil
  uniquify-buffer-name-style 'forward
+ sentence-end-double-space t
 
  ccls-initialization-options '(:index (:threads 2))
 
