@@ -16,4 +16,4 @@
 ;; HACK https://github.com/politza/pdf-tools/pull/588
 (package! pdf-tools
   :recipe (:host github :repo "flatwhatson/pdf-tools" :branch "fix-macros")
-  :pin "4a10c35e626ab6d7970dfd7335f4f883b1b879ef")
+  :pin "eb6d40663069f2b7e6b52e907eeaa4e37375feb6")
