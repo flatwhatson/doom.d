@@ -10,6 +10,14 @@
    :desc "M-x"                       ";"   #'execute-extended-command
    :desc "Eval expression"           ":"   #'eval-expression
 
+   (:prefix "b"
+    :desc "Switch to scratch buffer" "x"   #'doom/switch-to-scratch-buffer
+    :desc "Pop up scratch buffer"    "X"   #'doom/open-scratch-buffer)
+
+   (:prefix "f"
+    :desc "Find file from here"      "f"   #'+default/find-file-under-here
+    :desc "Find file"                "F"   #'find-file)
+
    (:prefix ("k" . "kill")
      :desc "Kill 'em all!"                "A" #'doom/kill-all-buffers
      :desc "Kill this buffer"             "b" #'doom/kill-this-buffer-in-all-windows
@@ -36,7 +44,7 @@
 
  (:after evil
   (:map evil-window-map
-   "f" #'delete-other-windows))
+   "f" #'doom/window-maximize-buffer))
 
  (:after isearch
    (:map isearch-mode-map
