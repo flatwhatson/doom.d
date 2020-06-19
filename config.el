@@ -23,8 +23,6 @@
  +doom-dashboard-banner-file "stallman-splash.png"
  +doom-dashboard-banner-padding '( 2 . 1 )
 
- doom-leader-alt-key "S-SPC"
-
  org-directory "~/Dropbox/org/"
 
  mouse-yank-at-point t
@@ -77,9 +75,6 @@
 
 (after! counsel
   (setq counsel-compile-build-directories nil))
-
-(after! evil
-  (setq evil-want-fine-undo t))
 
 (after! evil-org
   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
