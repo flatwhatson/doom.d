@@ -44,7 +44,8 @@
 
  (:after evil
   (:map evil-window-map
-   "f" #'doom/window-maximize-buffer))
+   "f" #'doom/window-maximize-buffer
+   "e" #'balance-windows))
 
  (:after isearch
    (:map isearch-mode-map
