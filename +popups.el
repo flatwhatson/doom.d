@@ -1,7 +1,7 @@
 ;;; ~/.doom.d/+popups.el -*- lexical-binding: t; -*-
 
 (set-popup-rules!
-  '(("^\\*info\\*$"
+  '(("^\\*info\\*"
      :slot 2 :side left :width 83 :quit nil)
     ("^\\*ielm\\*$"
      :vslot 2 :size 0.3 :quit nil :ttl nil)
