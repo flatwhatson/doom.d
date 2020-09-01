@@ -33,7 +33,7 @@
  shr-use-fonts nil
 
  indent-tabs-mode nil
- tab-width 2
+ tab-width 8
 
  +workspaces-on-switch-project-behavior nil
  uniquify-buffer-name-style 'forward
@@ -105,8 +105,9 @@
    'projectile-completing-read
    (cdr counsel-projectile-find-file-action)))
 
-(after! lsp-ui
-  (setq lsp-document-highlight-delay 0.5
+(after! lsp-mode
+  (setq lsp-auto-guess-root t
+        lsp-document-highlight-delay 0.5
         lsp-enable-indentation nil
         lsp-enable-on-type-formatting nil
         lsp-file-watch-threshold nil
@@ -116,8 +117,7 @@
 (advice-add #'lsp--find-root-interactively :override #'ignore)
 
 (after! org
-  (add-hook 'org-mode-hook #'turn-off-smartparens-mode)
-  (remove-hook 'org-mode-hook #'org-superstar-mode))
+  (add-hook 'org-mode-hook #'turn-off-smartparens-mode))
 
 (after! projectile
   (setq projectile-indexing-method 'hybrid
@@ -135,6 +135,10 @@
 (after! python
   (setq python-indent-guess-indent-offset nil
         python-indent-offset 2))
+
+(after! scheme
+  (put 'test-group 'scheme-indent-function 1)
+  (setq geiser-mode-start-repl-p t))
 
 (after! text-mode
   (add-hook! 'text-mode-hook
@@ -175,10 +179,9 @@
              (statement-cont        . ++)
              (template-args-cont    . ++))))
 
-  (setq-default
-   c-default-style "flat"
-   c-basic-offset tab-width
-   +cc-default-header-file-mode 'c++-mode))
+  (setf (alist-get 'c++-mode c-default-style) "flat")
+
+  (setq +cc-default-header-file-mode 'c++-mode))
 
 
 (use-package! evil-lisp-state
