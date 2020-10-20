@@ -39,14 +39,6 @@
  uniquify-buffer-name-style 'forward
  sentence-end-double-space t
 
- ccls-initialization-options '(:index (:threads 2))
-
- lsp-clients-clangd-args '("-j=2"
-                           "--background-index"
-                           "--clang-tidy"
-                           "--completion-style=detailed"
-                           "--header-insertion=never")
-
  which-key-idle-delay 0.5)
 
 (dolist (path '("^/usr/local/"
@@ -106,15 +98,15 @@
    (cdr counsel-projectile-find-file-action)))
 
 (after! lsp-mode
-  (setq lsp-auto-guess-root t
-        lsp-document-highlight-delay 0.5
-        lsp-enable-indentation nil
+  (setq lsp-enable-indentation nil
         lsp-enable-on-type-formatting nil
+        lsp-enable-semantic-highlighting nil
         lsp-file-watch-threshold nil
+        lsp-progress-via-spinner nil
+        lsp-ui-doc-enable nil
+        lsp-ui-peek-enable nil
         lsp-ui-sideline-enable nil)
   (set-lookup-handlers! 'lsp-ui-mode nil))
-
-(advice-add #'lsp--find-root-interactively :override #'ignore)
 
 (after! org
   (add-hook 'org-mode-hook #'turn-off-smartparens-mode))
