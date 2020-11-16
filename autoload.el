@@ -1,39 +1,7 @@
 ;;; ~/.doom.d/autoload.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
-(defun +hidpi-font-size (size)
-  "Auto-scale the font size based on DPI.
-
-On standard 24\" 1080p display: 12 -> 12
-On high DPI 14\" 1440p display: 12 -> 18"
-
-  ;; NOTE values from `display-pixel-height' and `display-mm-height'
-  ;; 24 inch 1920x1080 primary:   pixel-height 1080 mm-height 292
-  ;; 14 inch 2560x1440 primary:   pixel-height 1440 mm-height 254
-  ;; 29 inch 2560x1080 secondary: pixel-height 1080 mm-height 254 (from primary)
-
-  ;; NOTE dual-monitor `display-monitor-attributes-list'
-  ;; (((name . "eDP1")
-  ;;   (geometry 0 0 1920 1080)
-  ;;   (mm-size 310 170)
-  ;;   (frames))
-  ;;  ((name . "HDMI1")
-  ;;   (geometry 1920 0 2560 1080)
-  ;;   (mm-size 670 280)
-  ;;   (frames #<frame *ielm* – Doom Emacs 0x1221c30> #<frame  0x74f2450>)))
-
-  ;; TODO find monitor for current frame, use that geometry/mm-size for calcs
-  ;; TODO make scaling factor configurable and more intuitive
-
-  (if (or (not (display-pixel-height))
-          (not (display-mm-height)))
-      size
-    (round (/ (* size 0.27
-                 (display-pixel-height))
-              (display-mm-height)))))
-
-;;;###autoload
-(defun +cc-collapse-brace-list (langelem)
+(defun +flat/cc-collapse-brace-list (langelem)
   "Collapse extra indentation inside a brace-list."
   (when (or (save-excursion
               (save-match-data
@@ -48,7 +16,7 @@ On high DPI 14\" 1440p display: 12 -> 18"
     0))
 
 ;;;###autoload
-(defun +cc-better-arglist-close (langelem)
+(defun +flat/cc-better-arglist-close (langelem)
   "Indent arglist-close as though the closing paren was not present."
   ;; TODO indent unless followed by ; or {
   (let ((symbol
@@ -64,7 +32,7 @@ On high DPI 14\" 1440p display: 12 -> 18"
       (c-calc-offset (cons symbol (cdr langelem))))))
 
 ;;;###autoload
-(defun +cc-better-electric-colon-a (arg)
+(defun +flat/cc-better-electric-colon-a (arg)
   "Only auto-complete after TWO colons."
   (when (and company-mode
              (eq major-mode 'c++-mode)
@@ -73,15 +41,7 @@ On high DPI 14\" 1440p display: 12 -> 18"
     (company-cancel)))
 
 ;;;###autoload
-(defun +isearch-exit-start-of-match ()
-  "Exit isearch at the beginning of the match."
-  (interactive)
-  (isearch-exit)
-  (when (< isearch-other-end (point))
-    (goto-char isearch-other-end)))
-
-;;;###autoload
-(defun +ivy-partial-or-complete ()
+(defun +flat/ivy-partial-or-complete ()
   "Complete the minibuffer text as much as possible.
 If the text hasn't changed as a result, complete the minibuffer text with the
 currently selected candidate."
@@ -93,13 +53,13 @@ currently selected candidate."
          (ivy-insert-current))))
 
 ;;;###autoload
-(defun +ivy/project-search-emacsd (&optional arg initial-query)
+(defun +flat/ivy-project-search-emacsd (&optional arg initial-query)
   "Perform a project search in `doom-emacs-dir'."
   (interactive "P")
   (+ivy/project-search arg initial-query doom-emacs-dir))
 
 ;;;###autoload
-(defun +ivy/other-project-search (&optional arg initial-query)
+(defun +flat/ivy-other-project-search (&optional arg initial-query)
   "Prompt for a project, then search from the project root."
   (interactive "P")
   (+ivy/project-search arg initial-query

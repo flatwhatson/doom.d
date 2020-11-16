@@ -1,23 +1,13 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-;; TODO cc+sp: insert semicolon after enum/class/struct
-;; TODO cc+sp: fix extra " or > on include completion
-
-;; TODO flycheck: limit size of posframe for giant errors
-
-;; TODO perl: configure cperl-mode for doom
-
-;; TODO save-place support for pdf-view-mode
-;;  - org-pdfview can bookmark into PDFs, maybe relevant
-
 ;; HACK ensure emacs gets focus (eg. after restart)
 (add-hook! 'window-setup-hook
   (select-frame-set-input-focus (selected-frame)))
 
 (setq-default
  doom-theme    'doom-tomorrow-night
- doom-font     (font-spec :family "Hack" :size (+hidpi-font-size 12))
- doom-big-font (font-spec :family "Hack" :size (+hidpi-font-size 18))
+ doom-font     (font-spec :family "Hack" :size 12)
+ doom-big-font (font-spec :family "Hack" :size 18)
 
  +doom-dashboard-banner-dir (expand-file-name "banners/" doom-private-dir)
  +doom-dashboard-banner-file "stallman-splash.png"
@@ -155,7 +145,7 @@
     (sp-local-pair 'c++-mode "(" nil :post-handlers '(:rem ("||\n[i]" "RET")))
     (sp-local-pair 'c++-mode "{" nil :post-handlers '(:rem ("| "      "SPC"))))
 
-  (advice-add 'c-electric-colon :after #'+cc-better-electric-colon-a)
+  (advice-add 'c-electric-colon :after #'+flat/cc-better-electric-colon-a)
 
   (c-add-style
    "flat" '("Google"
@@ -163,11 +153,11 @@
             (c-basic-offset . 2)
             (c-offsets-alist
              (inlambda              . 0)
-             (inexpr-statement      +cc-collapse-brace-list +)
-             (arglist-intro         +cc-collapse-brace-list google-c-lineup-expression-plus-4)
-             (arglist-cont          +cc-collapse-brace-list 0)
-             (arglist-cont-nonempty +cc-collapse-brace-list ++)
-             (arglist-close         +cc-better-arglist-close 0)
+             (inexpr-statement      +flat/cc-collapse-brace-list +)
+             (arglist-intro         +flat/cc-collapse-brace-list google-c-lineup-expression-plus-4)
+             (arglist-cont          +flat/cc-collapse-brace-list 0)
+             (arglist-cont-nonempty +flat/cc-collapse-brace-list ++)
+             (arglist-close         +flat/cc-better-arglist-close 0)
              (statement-cont        . ++)
              (template-args-cont    . ++))))
 
