@@ -88,7 +88,8 @@
    (cdr counsel-projectile-find-file-action)))
 
 (after! lsp-mode
-  (setq lsp-enable-indentation nil
+  (setq lsp-auto-guess-root t
+        lsp-enable-indentation nil
         lsp-enable-on-type-formatting nil
         lsp-enable-semantic-highlighting nil
         lsp-file-watch-threshold nil
