@@ -17,6 +17,9 @@
     :desc "Find file from here"      "f"   #'+default/find-file-under-here
     :desc "Find file"                "F"   #'find-file)
 
+   (:prefix "i"
+    :desc "UUID"                     "U"   #'+flat/insert-uuid)
+
    (:prefix ("k" . "kill")
      :desc "Kill 'em all!"                "A" #'doom/kill-all-buffers
      :desc "Kill this buffer"             "b" #'doom/kill-this-buffer-in-all-windows

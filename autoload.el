@@ -67,3 +67,10 @@ currently selected candidate."
                            (completing-read "Search project: " projects
                                             nil t nil nil (doom-project-root))
                          (user-error "There are no known projects"))))
+
+;;;###autoload
+(defun +flat/insert-uuid ()
+  "Insert a randomly generated UUID."
+  (interactive)
+  (insert
+   (string-trim-right (shell-command-to-string "uuidgen"))))
