@@ -37,11 +37,11 @@
    (:prefix "s"
      :desc "Search directory"                 "d" #'+ivy/project-search-from-cwd
      :desc "Search directory (all files)"     "D" (λ!! #'+ivy/project-search-from-cwd t)
-     :desc "Search emacs.d"                   "e" #'+ivy/project-search-emacsd
+     :desc "Search emacs.d"                   "e" #'+flat/ivy-project-search-emacsd
      :desc "Search emacs.d (all files)"       "E" (λ!! #'+flat/ivy-project-search-emacsd t)
      :desc "Search project"                   "p" #'+ivy/project-search
      :desc "Search project (all files)"       "P" (λ!! #'+ivy/project-search t)
-     :desc "Search other project"             "o" #'+ivy/other-project-search
+     :desc "Search other project"             "o" #'+flat/ivy-other-project-search
      :desc "Search other project (all files)" "O" (λ!! #'+flat/ivy-other-project-search t)))
 
  (:after evil
