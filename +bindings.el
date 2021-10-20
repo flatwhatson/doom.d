@@ -28,35 +28,40 @@
      :desc "Kill project buffers"         "p" #'doom/kill-project-buffers)
 
    (:prefix "o"
-     :desc "Ielm"                         "i" #'ielm)
+    :desc "Ielm"                          "i" #'ielm
+    :desc "Compilation"                   "c" (λ! (pop-to-buffer compilation-last-buffer))
+    :desc "Messages"                      "m" (λ! (pop-to-buffer "*Messages*")))
 
    (:prefix "q"
      :desc "Restart Emacs"                "r" #'doom/restart
-     :desc "Restart & restore Emacs"      "R" #'doom/restart-and-restore)
-
-   (:prefix "s"
-     :desc "Search directory"                 "d" #'+ivy/project-search-from-cwd
-     :desc "Search directory (all files)"     "D" (λ!! #'+ivy/project-search-from-cwd t)
-     :desc "Search emacs.d"                   "e" #'+flat/ivy-project-search-emacsd
-     :desc "Search emacs.d (all files)"       "E" (λ!! #'+flat/ivy-project-search-emacsd t)
-     :desc "Search project"                   "p" #'+ivy/project-search
-     :desc "Search project (all files)"       "P" (λ!! #'+ivy/project-search t)
-     :desc "Search other project"             "o" #'+flat/ivy-other-project-search
-     :desc "Search other project (all files)" "O" (λ!! #'+flat/ivy-other-project-search t)))
+     :desc "Restart & restore Emacs"      "R" #'doom/restart-and-restore))
 
  (:after evil
   (:map evil-window-map
    "f" #'doom/window-maximize-buffer
    "e" #'balance-windows))
 
- (:after ivy
-   (:map ivy-minibuffer-map
-     [return] #'ivy-alt-done
-     "RET"    #'ivy-alt-done
-     [tab]    #'+flat/ivy-partial-or-complete
-     "TAB"    #'+flat/ivy-partial-or-complete))
+ (:after vertico
+  (:map vertico-map
+   "RET"   #'vertico-directory-enter
+   "DEL"   #'vertico-directory-delete-char
+   "M-DEL" #'vertico-directory-delete-word))
+
+ (:after ccls
+  (:map (c-mode-map c++-mode-map)
+   :n "C-h" nil
+   :n "C-j" nil
+   :n "C-k" nil
+   :n "C-l" nil))
+
+ (:after compile
+  (:map (compilation-mode-map compilation-minor-mode-map)
+   "h" nil))
 
  (:after pdf-view
    (:map pdf-view-mode-map
-     "q" nil
-     "Q" nil)))
+     "q"   nil
+     "Q"   nil
+     "o"   #'pdf-links-action-perform
+     "C-i" #'pdf-history-forward
+     "C-o" #'pdf-history-backward)))

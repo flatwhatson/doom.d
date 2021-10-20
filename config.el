@@ -1,12 +1,10 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
-;; HACK ensure emacs gets focus (eg. after restart)
-(add-hook! 'window-setup-hook
-  (select-frame-set-input-focus (selected-frame)))
-
 (setq-default
  doom-theme    'doom-tomorrow-night
- doom-font     (font-spec :family "Hack" :size 12)
+ doom-font     (font-spec :family "Hack"
+                          :size (if (> (display-pixel-height) 1080)
+                                    14 12))
  doom-big-font (font-spec :family "Hack" :size 18)
 
  +doom-dashboard-banner-dir (expand-file-name "banners/" doom-private-dir)
@@ -28,6 +26,7 @@
  +workspaces-on-switch-project-behavior nil
  uniquify-buffer-name-style 'forward
  sentence-end-double-space t
+ enable-local-variables t
 
  which-key-idle-delay 0.5)
 
@@ -41,9 +40,7 @@
   (string-match-p "/\\.emacs\\.d/\\.local/straight/repos" project-root))
 
 (add-hook! 'doom-init-ui-hook
-  (global-subword-mode +1)
-  (+global-word-wrap-mode +1))
-
+  (global-subword-mode +1))
 
 (after! ace-window
   (setq aw-swap-invert t))
@@ -51,12 +48,21 @@
 (after! autorevert
   (setq auto-revert-verbose nil))
 
+(after! browse-url
+  (setq browse-url-browser-function 'browse-url-firefox))
+
 (after! company
   (setq company-idle-delay 0.2
         company-minimum-prefix-length 2))
 
-(after! counsel
-  (setq counsel-compile-build-directories nil))
+(after! compile
+  ;; TODO get xterm-color working for compile
+  (setq compilation-environment '("TERM=xterm-256color")
+        compilation-scroll-output 'first-error
+        compilation-skip-threshold 2)
+  (defadvice! +flat/compilation-filter-a (orig-fn proc string)
+    :around #'compilation-filter
+    (funcall orig-fn proc (xterm-color-filter string))))
 
 (after! evil-org
   (remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
@@ -76,23 +82,14 @@
 (after! info
   (advice-add #'Info-up :after #'doom-recenter-a))
 
-(after! ivy
-  (setq ivy-extra-directories nil
-        ivy-magic-tilde nil))
-
-(after! (ivy projectile)
-  ;; HACK more actions for `projectile-find-other-file'
-  (require 'counsel-projectile)
-  (ivy-add-actions
-   'projectile-completing-read
-   (cdr counsel-projectile-find-file-action)))
-
 (after! lsp-mode
   (setq lsp-auto-guess-root t
+        lsp-enable-file-watchers nil
         lsp-enable-indentation nil
         lsp-enable-on-type-formatting nil
-        lsp-enable-semantic-highlighting nil
+        lsp-semantic-tokens-enable nil
         lsp-file-watch-threshold nil
+        lsp-headerline-breadcrumb-enable nil
         lsp-progress-via-spinner nil
         lsp-ui-doc-enable nil
         lsp-ui-peek-enable nil
@@ -103,11 +100,7 @@
   (add-hook 'org-mode-hook #'turn-off-smartparens-mode))
 
 (after! projectile
-  (setq projectile-indexing-method 'hybrid
-        projectile-ignored-project-function #'+projectile-ignore-project-p))
-
-(after! swiper
-  (setq swiper-goto-start-of-match t))
+  (setq projectile-ignored-project-function #'+projectile-ignore-project-p))
 
 (after! vc
   (setq vc-suppress-confirm t))
@@ -124,13 +117,20 @@
   (setq geiser-mode-start-repl-p t))
 
 (after! text-mode
-  (add-hook! 'text-mode-hook
-    ;; Apply ANSI color codes
+  (defun ansify-buffer ()
     (with-silent-modifications
       (ansi-color-apply-on-region (point-min) (point-max)))
     ;; Hide DOS EOL markers
     (setq buffer-display-table (make-display-table))
-    (aset buffer-display-table ?\^M [])))
+    (aset buffer-display-table ?\^M [])
+    (make-local-variable 'after-revert-hook)
+    (add-hook! 'after-revert-hook :local #'ansify-buffer))
+  (add-hook! 'text-mode-hook #'ansify-buffer))
+
+(after! ccls
+  (plist-put! ccls-initialization-options
+              :index '(:threads 2 :trackDependency 1)
+              :cache `(:directory ,(expand-file-name "~/.ccls-cache"))))
 
 (after! cmake-mode
   (after! smartparens
@@ -146,7 +146,8 @@
     (sp-local-pair 'c++-mode "(" nil :post-handlers '(:rem ("||\n[i]" "RET")))
     (sp-local-pair 'c++-mode "{" nil :post-handlers '(:rem ("| "      "SPC"))))
 
-  (advice-add 'c-electric-colon :after #'+flat/cc-better-electric-colon-a)
+  (advice-add #'company--should-begin    :filter-return #'+flat/cc-company-double-colon-a)
+  (advice-add #'company--should-continue :filter-return #'+flat/cc-company-double-colon-a)
 
   (c-add-style
    "flat" '("Google"

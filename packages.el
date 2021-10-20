@@ -4,9 +4,7 @@
 (unpin! doom-themes)
 (package! evil-lisp-state)
 (package! flycheck-package)
+(package! google-c-style)
+(package! guix)
 (package! pkgbuild-mode)
-
-;; FIXME straight.el doesn't respect repo's default branch
-;; https://github.com/raxod502/straight.el/issues/279
-(package! google-c-style
-  :recipe (:host github :repo "google/styleguide" :branch "gh-pages"))
+(package! xterm-color)
