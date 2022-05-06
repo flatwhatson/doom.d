@@ -2,14 +2,14 @@
 
 (setq-default
  doom-theme    'doom-tomorrow-night
- doom-font     (font-spec :family "Hack"
-                          :size (if (> (display-pixel-height) 1080)
-                                    14 12))
+ doom-font     (font-spec :family "Hack" :size 14)
  doom-big-font (font-spec :family "Hack" :size 18)
 
  +doom-dashboard-banner-dir (expand-file-name "banners/" doom-private-dir)
  +doom-dashboard-banner-file "stallman-splash.png"
  +doom-dashboard-banner-padding '( 2 . 1 )
+
+ +vc-gutter-in-remote-files t
 
  org-directory "~/Dropbox/org/"
 
@@ -55,6 +55,11 @@
   (setq company-idle-delay 0.2
         company-minimum-prefix-length 2))
 
+(after! company-yasnippet
+  (defadvice! +flat/company-yasnippet-candidates-a (orig-fn &rest args)
+    :override #'company-yasnippet--candidates
+    nil))
+
 (after! compile
   ;; TODO get xterm-color working for compile
   (setq compilation-environment '("TERM=xterm-256color")
@@ -87,10 +92,11 @@
         lsp-enable-file-watchers nil
         lsp-enable-indentation nil
         lsp-enable-on-type-formatting nil
-        lsp-semantic-tokens-enable nil
         lsp-file-watch-threshold nil
         lsp-headerline-breadcrumb-enable nil
+        lsp-lens-enable nil
         lsp-progress-via-spinner nil
+        lsp-semantic-tokens-enable nil
         lsp-ui-doc-enable nil
         lsp-ui-peek-enable nil
         lsp-ui-sideline-enable nil)
@@ -130,7 +136,74 @@
 (after! ccls
   (plist-put! ccls-initialization-options
               :index '(:threads 2 :trackDependency 1)
-              :cache `(:directory ,(expand-file-name "~/.ccls-cache"))))
+              :cache `(:directory ,(expand-file-name "~/.ccls-cache")))
+
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-tramp-connection (lambda () (cons ccls-executable ccls-args)))
+    :major-modes '(c-mode c++-mode cuda-mode objc-mode)
+    :remote? t
+    :server-id 'ccls-remote
+    :multi-root nil
+    :notification-handlers
+    (lsp-ht ("$ccls/publishSkippedRanges" #'ccls--publish-skipped-ranges)
+            ("$ccls/publishSemanticHighlight" #'ccls--publish-semantic-highlight))
+    :initialization-options (lambda () ccls-initialization-options)
+    :library-folders-fn ccls-library-folders-fn)))
+
+(after! lsp-javascript
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-tramp-connection (lambda ()
+                                            (cons lsp-clients-typescript-tls-path
+                                                  lsp-clients-typescript-server-args)))
+    :activation-fn 'lsp-typescript-javascript-tsx-jsx-activate-p
+    :completion-in-comments? t
+    :initialization-options (lambda ()
+                              (list :disableAutomaticTypingAcquisition lsp-clients-typescript-disable-automatic-typing-acquisition
+                                    :logVerbosity lsp-clients-typescript-log-verbosity
+                                    :maxTsServerMemory lsp-clients-typescript-max-ts-server-memory
+                                    :npmLocation lsp-clients-typescript-npm-location
+                                    :plugins lsp-clients-typescript-plugins
+                                    :preferences lsp-clients-typescript-preferences))
+    :initialized-fn (lambda (workspace)
+                      (with-lsp-workspace workspace
+                        (lsp--set-configuration
+                         (ht-merge (lsp-configuration-section "javascript")
+                                   (lsp-configuration-section "typescript")))))
+    :ignore-messages '("readFile .*? requested by TypeScript but content not available")
+    :server-id 'ts-ls-remote
+    :remote? t
+    :request-handlers (ht ("_typescript.rename" #'lsp-javascript--rename)))))
+
+(after! lsp-pyright
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-tramp-connection (lambda ()
+                                            (cons "pyright-langserver"
+                                                  lsp-pyright-langserver-command-args)))
+    :major-modes '(python-mode)
+    :server-id 'pyright-remote
+    :remote? t
+    :multi-root lsp-pyright-multi-root
+    :initialized-fn (lambda (workspace)
+                      (with-lsp-workspace workspace
+                        (lsp--set-configuration
+                         (make-hash-table :test 'equal))))
+    :notification-handlers (lsp-ht ("pyright/beginProgress" 'lsp-pyright--begin-progress-callback)
+                                   ("pyright/reportProgress" 'lsp-pyright--report-progress-callback)
+                                   ("pyright/endProgress" 'lsp-pyright--end-progress-callback)))))
+
+(after! lsp-cmake
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-tramp-connection "cmake-language-server")
+    :major-modes '(cmake-mode)
+    :server-id 'cmakels-remote
+    :remote? t)))
+
+(after! tramp
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
 (after! cmake-mode
   (after! smartparens
@@ -163,7 +236,7 @@
              (statement-cont        . ++)
              (template-args-cont    . ++))))
 
-  (setf (alist-get 'c++-mode c-default-style) "flat")
+  (setf (alist-get 'other c-default-style) "flat")
 
   (setq +cc-default-header-file-mode 'c++-mode))
 

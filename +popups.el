@@ -7,6 +7,8 @@
     ;;  :slot 2 :vslot -2 :side left :width 83 :quit nil)
     ("^\\*Man "
      :slot 2 :vslot -2 :side left :width 83 :quit nil)
+    ("^\\*WoMan "
+     :slot 2 :vslot -2 :side left :width 83 :quit nil)
     ("^\\*Messages\\*$"
      :slot 2 :vslot -2 :side left :width 83 :quit nil)
     ("^\\*ielm\\*$"

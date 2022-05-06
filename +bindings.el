@@ -47,6 +47,10 @@
    "DEL"   #'vertico-directory-delete-char
    "M-DEL" #'vertico-directory-delete-word))
 
+ (:after woman
+  (:map woman-mode-map
+   :n "o"  #'link-hint-open-link))
+
  (:after ccls
   (:map (c-mode-map c++-mode-map)
    :n "C-h" nil
