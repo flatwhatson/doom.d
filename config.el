@@ -151,7 +151,7 @@
     :initialization-options (lambda () ccls-initialization-options)
     :library-folders-fn ccls-library-folders-fn)))
 
-(after! lsp-javascript
+(after! (lsp-javascript tramp)
   (lsp-register-client
    (make-lsp-client
     :new-connection (lsp-tramp-connection (lambda ()
@@ -176,7 +176,7 @@
     :remote? t
     :request-handlers (ht ("_typescript.rename" #'lsp-javascript--rename)))))
 
-(after! lsp-pyright
+(after! (lsp-pyright tramp)
   (lsp-register-client
    (make-lsp-client
     :new-connection (lsp-tramp-connection (lambda ()
@@ -194,7 +194,28 @@
                                    ("pyright/reportProgress" 'lsp-pyright--report-progress-callback)
                                    ("pyright/endProgress" 'lsp-pyright--end-progress-callback)))))
 
-(after! lsp-cmake
+(after! (lsp-rust tramp)
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-tramp-connection (lambda ()
+                                            lsp-rust-analyzer-server-command))
+    :major-modes '(rust-mode rustic-mode)
+    :priority (if (eq lsp-rust-server 'rust-analyzer) 1 -1)
+    :initialization-options 'lsp-rust-analyzer--make-init-options
+    :notification-handlers (ht<-alist lsp-rust-notification-handlers)
+    :action-handlers (ht ("rust-analyzer.runSingle" #'lsp-rust--analyzer-run-single)
+                         ("rust-analyzer.debugSingle" #'lsp-rust--analyzer-debug-lens)
+                         ("rust-analyzer.showReferences" #'lsp-rust--analyzer-show-references))
+    :library-folders-fn (lambda (_workspace) lsp-rust-library-directories)
+    :after-open-fn (lambda ()
+                     (when lsp-rust-analyzer-server-display-inlay-hints
+                       (lsp-rust-analyzer-inlay-hints-mode)))
+    :ignore-messages nil
+    :server-id 'rust-analyzer-remote
+    :remote? t
+    :custom-capabilities `((experimental . ((snippetTextEdit . ,(and lsp-enable-snippet (featurep 'yasnippet)))))))))
+
+(after! (lsp-cmake tramp)
   (lsp-register-client
    (make-lsp-client
     :new-connection (lsp-tramp-connection "cmake-language-server")
