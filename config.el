@@ -171,6 +171,9 @@
                         (lsp--set-configuration
                          (ht-merge (lsp-configuration-section "javascript")
                                    (lsp-configuration-section "typescript")))))
+    :after-open-fn (lambda ()
+                     (when lsp-javascript-display-inlay-hints
+                       (lsp-javascript-inlay-hints-mode)))
     :ignore-messages '("readFile .*? requested by TypeScript but content not available")
     :server-id 'ts-ls-remote
     :remote? t
