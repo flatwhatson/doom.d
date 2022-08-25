@@ -1,7 +1,7 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
 (setq-default
- doom-theme    'doom-tomorrow-night
+ doom-theme    'doom-tokyo-night
  doom-font     (font-spec :family "Hack" :size 14)
  doom-big-font (font-spec :family "Hack" :size 18)
 

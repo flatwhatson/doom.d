@@ -8,4 +8,5 @@
   '(demangled :box nil)
   '(info-menu-star :foreground nil)
   `(link-visited :foreground ,(doom-color 'dark-blue))
-  '(whitespace-tab :background nil))
+  `(whitespace-tab :foreground ,(doom-color 'base0) :background nil)
+  '(diff-removed :background nil))
