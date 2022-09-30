@@ -6,8 +6,8 @@
  doom-big-font (font-spec :family "Hack" :size 18)
 
  +doom-dashboard-banner-dir (expand-file-name "banners/" doom-private-dir)
- +doom-dashboard-banner-file "stallman-splash.png"
- +doom-dashboard-banner-padding '( 2 . 1 )
+ +doom-dashboard-banner-file "guile-splash.png"
+ +doom-dashboard-banner-padding '( 1 . 1 )
 
  +vc-gutter-in-remote-files t
 
