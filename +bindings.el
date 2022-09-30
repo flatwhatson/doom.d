@@ -17,6 +17,9 @@
     :desc "Find file from here"      "f"   #'+default/find-file-under-here
     :desc "Find file"                "F"   #'find-file)
 
+   (:prefix "h"
+    :desc "Read Info manual"         "r"   #'info-display-manual)
+
    (:prefix "i"
     :desc "UUID"                     "U"   #'+flat/insert-uuid)
 
