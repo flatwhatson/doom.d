@@ -82,7 +82,7 @@
   (setq expand-region-subword-enabled t))
 
 (after! flycheck
-  (setq flycheck-display-errors-delay 0.1))
+  (setq flycheck-display-errors-delay 0.3))
 
 (after! info
   (advice-add #'Info-up :after #'doom-recenter-a))
