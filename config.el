@@ -136,8 +136,9 @@
 (after! ccls
   (plist-put! ccls-initialization-options
               :index '(:threads 2 :trackDependency 1)
-              :cache `(:directory ,(expand-file-name "~/.ccls-cache")))
+              :cache `(:directory ,(expand-file-name "~/.ccls-cache"))))
 
+(after! (ccls tramp)
   (lsp-register-client
    (make-lsp-client
     :new-connection (lsp-tramp-connection (lambda () (cons ccls-executable ccls-args)))
