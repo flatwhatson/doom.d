@@ -121,7 +121,9 @@
 
 (after! scheme
   (put 'test-group 'scheme-indent-function 1)
-  (setq geiser-mode-start-repl-p t))
+  (setq geiser-mode-start-repl-p t)
+  (add-to-list 'scheme-imenu-generic-expression
+               '(nil "^(define\\*?\\(?:-public\\)?\\s-+(?\\(\\sw+\\)" 1)))
 
 (after! text-mode
   (defun ansify-buffer ()
