@@ -22,6 +22,7 @@
 
  indent-tabs-mode nil
  tab-width 8
+ fill-column 72
 
  +workspaces-on-switch-project-behavior nil
  uniquify-buffer-name-style 'forward
