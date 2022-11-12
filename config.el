@@ -7,7 +7,7 @@
 
  +doom-dashboard-banner-dir (expand-file-name "banners/" doom-private-dir)
  +doom-dashboard-banner-file "guile-splash.png"
- +doom-dashboard-banner-padding '( 1 . 1 )
+ +doom-dashboard-banner-padding '( 2 . 1 )
 
  +vc-gutter-in-remote-files t
 
