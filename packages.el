@@ -12,4 +12,4 @@
 
 (package! lsp-mode
   :recipe (:host github :repo "flatwhatson/lsp-mode" :branch "tramp-fix")
-  :pin "c69e53599bc38af404a820ff8de510f4951da782")
+  :pin "0ffe3572f5c90fd383a36c1bdf30f1c964a668da")
